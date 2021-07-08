@@ -45,7 +45,6 @@ pip install -r requirements.txt
 ```
 
 Configure hyperparameters in rl-baselines3-zoo/hyperparams/ppo.yml.
-[Contribution guidelines for this project](docs/CONTRIBUTING.md)
 
 
 ## Usage
