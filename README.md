@@ -109,7 +109,7 @@ python train.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents
 ```
 * `--algo`: specifies the algorithm to be executed
 * `--env`: name of environment
-* `-f`: save agent to the wished folder, if not defined logs is used as the default path
+* `-f`: save agent to desired folder. If not defined, `logs` is used as the default path, therefore it's an optional paramater.
 
 ### Train a certain agent more:
 
@@ -123,7 +123,7 @@ python train.py --algo ppo --env OekolopolyBox-v0 -i oekolopoly_agents/ppo/Oekol
 ```shell
 python enjoy.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents --exp-id 9
 ```
-* `--exp-id 9`: enjoy a particular agent. If not defined, the last trained agent is called per default
+* `--exp-id 9`: enjoy a particular agent. If not defined, the last trained agent is called per default, therefore it's an optional paramater.
 
 ### Benchmarks
 
@@ -133,18 +133,21 @@ Now generate benchmark:
 
 ```shell
 python -m utils.benchmark --log-dir rl-trained-agents
-
 ```
+* `--log-dir`: specify folder with agents
 
 Generate benchmark for all agents used on custom environment:
 ```shell
 python -m utils.benchmark --log-dir oekolopoly_agents
 ```
-**Note 1**: Oftentimes it fails to generate the benchmark and the loading of the table is the command prompt "freezes". A solution as of now is moving own agents to the `rl-trained-agents` directory and deleting the rest in order to see only chosen agents in comparison.
 
-**Note 2**: Generating benchmark for own agents from the `logs` directory is not possible because it clashes with the `benchmark` folder there - either loading "freezes" or it starts generating a benchmark for *ALL* trained agents which takes too long. 
+**Note 1**: Oftentimes the generating of the benchmark fails and the loading of the table in the command prompt "freezes". A solution as of now is moving own agents to the `rl-trained-agents` directory and deleting the rest in order to see only chosen agents in comparison.
+
+**Note 2**: Generating benchmark for own agents from the `logs` directory is not possible because it clashes with the `benchmark` folder there - either loading "freezes" or it starts generating a benchmark for *ALL* trained agents which takes all too long. 
+
 
 Overview of commands and folders which are accessed by default with their respective implementations/files:
+
 Command | Default Folder | File
 ------------ | ------------- | -------------
 train | logs | train.py
