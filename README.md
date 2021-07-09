@@ -174,7 +174,7 @@ This section is relevant in case there are further errors and therefore RL-Basel
    <img src="images/envvar.png" align="center" width="40%"/>
    
    ## TO DO
-   -  [] Test giving reward only at the end of the game, meaning it receives only incentive if it has played between 10 and 30 rounds. Reward should be calculated as in the original game.
+   -  [x] Test giving reward only at the end of the game, meaning it receives only incentive if it has played between 10 and 30 rounds. Reward should be calculated as in the original game.
    -  [] Develop further Wrapper, which splits the action space in low-medium-high
    
    ## Resources
