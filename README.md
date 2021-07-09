@@ -1,5 +1,5 @@
 # oekolopoly-rl
-A repository aimed at performing different RL-Algorithms on the custom environment Oekolopoly using RL-Baselines3-Zoo Framework.
+A repository aimed at performing different RL-Algorithms on the custom environment [Oekolopoly](https://github.com/cherrisimo/oekolopoly) using [RL-Baselines3-Zoo](https://github.com/DLR-RM/rl-baselines3-zoo) Framework.
 
 ## Requirements
 
@@ -15,7 +15,7 @@ Install tensorflow in a new environment as follows:
 conda create -n tf tensorflow
 ```
 
-or 
+or in an existing one:
 
 ```shell
 conda install -c anaconda tensorflow
