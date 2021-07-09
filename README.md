@@ -142,7 +142,7 @@ python -m utils.benchmark --log-dir oekolopoly_agents
 **Note 2**: Generating benchmark for own agents from the `logs` directory is not possible because it clashes with the `benchmark` folder there - either loading "freezes" or it starts generating a benchmark for *ALL* trained agents which takes too long. 
 
 Overview of commands and folders which are accessed by default with their respective implementations/files:
-Command | Default Folder |
+Command | Default Folder | File
 ------------ | ------------- | -------------
 train | logs | train.py
 enjoy | rl-trained-agents | enjoy.py
