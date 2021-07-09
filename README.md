@@ -41,7 +41,8 @@ Install git:
 conda install git
 ```
 
-RL-Baselines3-Zoo contains further repositories. In One of them reside the over 100+ trained agents. The argument `--recursive` is used to clone them as well.
+RL-Baselines3-Zoo contains further repositories. In one of them reside the over 100+ trained agents. The argument `--recursive` is used to clone them as well.
+<sub>Note: As of now not sure how to clone the repo with its sub-repos using GitHub Desktop.</sub>
 
 Clone respective repository with its sub-repos:
 ```shell
