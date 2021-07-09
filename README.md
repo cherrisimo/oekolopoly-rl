@@ -1,9 +1,13 @@
-# oekolopoly-rl
+# oekolopoly-rl  [![Python 3.8](https://upload.wikimedia.org/wikipedia/commons/a/a5/Blue_Python_3.8_Shield_Badge.svg)](https://upload.wikimedia.org/wikipedia/commons/a/a5/Blue_Python_3.8_Shield_Badge.svg)
 A repository aimed at performing different RL-Algorithms on the custom environment [Oekolopoly](https://github.com/cherrisimo/oekolopoly) using [RL-Baselines3-Zoo](https://github.com/DLR-RM/rl-baselines3-zoo) Framework.
 
 ## Repo structure overview
 
-The Directory [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) contains zip folders with trained agents grouped by the algorithm they've been trained with.
+* [oekolopoly](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly) carries the Oekolopoly environment with following differences:
+  * The observation space no longer contains the flag valid_turn as it brings no information for the state of the environment and is better to be stored in a variable within the step function
+  * Assertions have been added instead of some if-statements for consistency and better readability 
+  * Multiply render functions have been added to showcase the gameplay of agents
+* [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) contains zip folders with trained agents grouped by the algorithm they've been trained with.
  
 ## Installing
 
