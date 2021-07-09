@@ -3,11 +3,11 @@ A repository aimed at performing different RL-Algorithms on the custom environme
 
 ## Repo structure overview
 
-* [oekolopoly](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly) carries the Oekolopoly environment with following differences:
+* [oekolopoly](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly) contains the Oekolopoly environment with following differences:
   * The observation space no longer contains the flag valid_turn as it brings no information for the state of the environment and is better to be stored in a variable within the step function
   * Assertions have been added instead of some if-statements for consistency and better readability 
   * Multiply render functions have been added to showcase the gameplay of agents
-* [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) contains zip folders with trained agents grouped by the algorithm they've been trained with.
+* [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) carries zip folders with trained agents grouped by the algorithm they've been trained with.
  
 ## Installing
 
