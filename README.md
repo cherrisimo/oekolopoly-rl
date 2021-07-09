@@ -63,6 +63,7 @@ try:
 except ImportError:
     oekolopoly = None
 ```
+Following instructions include the **PPO** algorithm as example.
 
 Configure hyperparameters in `rl-baselines3-zoo/hyperparams/ppo.yml` as shown below:
 
@@ -99,8 +100,9 @@ Optionally create a folder to store each trained agent. A further folder named a
     └── ppo
     └── ...
 ```
+If not done `logs` stores the newly trained agents per default.
 
-Train an agent:
+### Train an agent:
 
 ```shell
 python train.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents
@@ -109,20 +111,21 @@ python train.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents
 * `--env`: name of environment
 * `-f`: save agent to the wished folder, if not defined logs is used as the default path
 
-Train a certain agent more:
+### Train a certain agent more:
 
 ```shell
 python train.py --algo ppo --env OekolopolyBox-v0 -i oekolopoly_agents/ppo/OekolopolyBox-v0_1/OekolopolyBox-v0.zip
 ```
 * `-i`: path to the particular agent
 
-See trained agent in action using:
+### See trained agent in action using:
 
 ```shell
 python enjoy.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents --exp-id 9
 ```
 * `--exp-id 9`: enjoy a particular agent. If not defined, the last trained agent is called per default
 
+### Benchmarks
 
 The table shown in `benchmark.md` includes only agents with highest performance (not quantatively evaluated). In order to see own trained agent amongst the ones from baselines, the folder of the wished agent should be pasted to the `rl-trained-agents` directory. For example the first agent trained with PPO should be displayed in the benchmark table, this requires the folder `OekolopolyBox-v0_1` to be included in the already said directory. Path: **oekolopoly_agents** -> **ppo** -> **OekolopolyBox-v0_1**
 
