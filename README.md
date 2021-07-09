@@ -174,8 +174,8 @@ This section is relevant in case there are further errors and therefore RL-Basel
    <img src="images/envvar.png" align="center" width="40%"/>
    
    ## TO DO
-   -  [x] Test giving reward only at the end of the game, meaning it receives only incentive if it has played between 10 and 30 rounds. Reward should be calculated as in the original game.
-   -  [] Develop further Wrapper, which splits the action space in low-medium-high
+   -  [ ] Test giving reward only at the end of the game, meaning it receives only incentive if it has played between 10 and 30 rounds. Reward should be calculated as in the original game.
+   -  [ ] Develop further Wrapper, which splits the action space in low-medium-high
    
    ## Resources
    * [Stable Baselines3](https://stable-baselines3.readthedocs.io/en/master/guide/rl_zoo.html)
