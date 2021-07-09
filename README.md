@@ -5,10 +5,10 @@ A repository aimed at performing different RL-Algorithms on the custom environme
 
 * [oekolopoly](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly) contains the Oekolopoly environment with following differences:
   * The observation space no longer contains the flag valid_turn as it brings no information about the state of the environment and is better to be stored in a variable within the step function. 
-  * Assertions have been added instead of some if-statements for consistency and better readability 
-  * Reward focused on keeping the Life Areas *Produktion* and *Bevoelkerung* in their middle values.
-  * Multiply render functions have been added to showcase the gameplay of agents
-  * A registered wrapper, which transforms the action space to Box type and has two functions which correct action values. For the RL-experiments the first one is being invoked.
+  * Assertions have been added instead of some if-statements for consistency and better readability.
+  * Added reward, which is focused on keeping the Life Areas *Produktion* and *Bevoelkerung* in their middle values.
+  * Multiply render functions have been added to showcase the gameplay of agents.
+  * A registered wrapper, which transforms the action space to Box type and has two functions, which correct action values. For the RL-experiments the first one is being invoked.
 * [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) carries zip folders with trained agents grouped by the algorithm they've been trained with.
  
 ## Installing
