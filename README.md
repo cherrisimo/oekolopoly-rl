@@ -178,6 +178,7 @@ This section is relevant in case there are further errors and therefore RL-Basel
    ## TO DO
    -  [ ] Test giving reward only at the end of the game, meaning it receives only incentive if the agent has played between 10 and 30 rounds. Reward should be calculated as in the original game.
    -  [ ] Develop further Wrapper, which splits the action space in low-medium-high
+   -  [ ] Test different reward systems on PPO, A2C, DDPG, TD3, SAC
    
    ## Resources
    * [Stable Baselines3](https://stable-baselines3.readthedocs.io/en/master/guide/rl_zoo.html)
