@@ -25,14 +25,12 @@ conda install -c forge pybullet
 conda install -c forge box2d-py
 ```
 
-RL-Baselines3-Zoo contains in itself further repositories. One of them contains the over 100+ trained agents. The argument `--recursive` is used to clone them.
-
 Install git:
 ```shell
 conda install git
 ```
 
-Clone respective repository:
+RL-Baselines3-Zoo contains in itself further repositories. One of them contains the over 100+ trained agents. The argument `--recursive` is used to clone them. Clone respective repository with its sub-repos:
 ```shell
 git clone --recursive https://github.com/DLR-RM/rl-baselines3-zoo
 ```
@@ -43,8 +41,11 @@ In the repository folder execute following command:
 cd rl-baselines3-zoo
 pip install -r requirements.txt
 ```
-Once installed RL-Baselines3-Zoo is ready to use. 
+
+## Usage
+
 Add custom environment to `utils/import_envs.py` using:
+
 ```python
 try:
     import oekolopoly
@@ -70,11 +71,11 @@ OekolopolyBox-v0:
 ```
 
 If custom environment is not yet installed, now it can be done:
+
 ```
 pip install -e . of environment
 ```
 
-## Usage
 Optionally create a folder to store each trained agent. A further folder named after the used algorithm for the trained agent should reside in it as shown here:
 
 ```
@@ -90,6 +91,7 @@ Optionally create a folder to store each trained agent. A further folder named a
 ```
 
 Train an agent:
+
 ```shell
 python train.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents
 ```
