@@ -167,3 +167,6 @@ This section is relevant in case there are further errors and therefore RL-Basel
    
    <img src="images/sysvar.png" align="left" width="40%"/>
    <img src="images/envvar.png" align="center" width="40%"/>
+   
+   ## Resources
+   * [Stable Baselines3](https://stable-baselines3.readthedocs.io/en/master/guide/rl_zoo.html)
