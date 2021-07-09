@@ -1,5 +1,9 @@
 # oekolopoly-rl
 A repository aimed at performing different RL-Algorithms on the custom environment [Oekolopoly](https://github.com/cherrisimo/oekolopoly) using [RL-Baselines3-Zoo](https://github.com/DLR-RM/rl-baselines3-zoo) Framework.
+
+## Repo structure overview
+
+The Directory [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) contains zip folders with trained agents grouped by the algorithm they've been trained with.
  
 ## Installing
 
