@@ -1,19 +1,5 @@
 # oekolopoly-rl
 A repository aimed at performing different RL-Algorithms on the custom environment [Oekolopoly](https://github.com/cherrisimo/oekolopoly) using [RL-Baselines3-Zoo](https://github.com/DLR-RM/rl-baselines3-zoo) Framework.
-
-## Optional
-
-* A compiler may be needed to be installed for compiling modules like PyBullet. Here is relied on [Visual Studio](https://visualstudio.microsoft.com/downloads/) Community version.
-* In case the building of wheels for pytype fails [SWIG](https://sourceforge.net/projects/swig/) must be downloaded and unzipped to the wished directory. Next up Environment Variables should be set as follows:
-    
-   1. Go to **Settings** -> **System** -> **About** -> **System info** -> **Advanced system settings** -> **Environment Variables...**  <sub> *[Tutorial with images](https://superuser.com/questions/949560/how-do-i-set-system-environment-variables-in-windows-10)* </sub>
-
-   2. In second half of the window under **System Variables** select `Path`
-    
-   3. Create a new path to the directory where the unzipped **swigwin** folder resides as shown in the second image below.
-   
-   <img src="images/sysvar.png" align="left" width="40%"/>
-   <img src="images/envvar.png" align="center" width="40%"/>
  
 ## Installing
 
@@ -148,3 +134,20 @@ Command | Default Folder
 train | logs
 enjoy | rl-trained-agents
 benchmark | rl-trained-agents
+
+
+## Optional requirements
+
+This section is relevant in case there are further errors and therefore RL-Baselines3-Zoo could not be installed properly.
+
+* A compiler may be needed for compiling modules like PyBullet. Here is relied on [Visual Studio](https://visualstudio.microsoft.com/downloads/) Community version. No further settings are required.
+* In case the building of wheels for pytype fails [SWIG](https://sourceforge.net/projects/swig/) must be downloaded and unzipped to any desired directory. Next up set Environment Variables as follows:
+    
+   1. Go to **Settings** -> **System** -> **About** -> **System info** -> **Advanced system settings** -> **Environment Variables...**  <sub> *[Tutorial with images](https://superuser.com/questions/949560/how-do-i-set-system-environment-variables-in-windows-10)* </sub>
+
+   2. In second half of the window under **System Variables** select `Path`
+    
+   3. Create a new path to the directory where the unzipped **swigwin** folder resides as shown in the second image below.
+   
+   <img src="images/sysvar.png" align="left" width="40%"/>
+   <img src="images/envvar.png" align="center" width="40%"/>
