@@ -189,7 +189,8 @@ This section is relevant in case there are further errors and therefore RL-Basel
    
    ## TO DO
    -  [ ] Test giving reward only at the end of the game, meaning it receives only incentive if the agent has played between 10 and 30 rounds. Reward should be calculated as in the original game.
-   -  [ ] Develop further Wrapper, which splits the action space in low-medium-high
+   -  [ ] Develop further Wrapper to split the observation space in low-medium-high
+   -  [ ] Develop another Wrapper to split action in three sectors which are to be distributed among the 5 Life Areas
    -  [ ] Test different reward systems on PPO, A2C, DDPG, TD3, SAC
    
    ## Resources
