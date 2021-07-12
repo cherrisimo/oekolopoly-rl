@@ -115,7 +115,7 @@ python train.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents --tensorb
 * `--algo`: specifies the algorithm to be executed
 * `--env`: name of environment
 * `-f`: save agent to desired folder. If not defined, `logs` is used as the default path, therefore it's an optional paramater.
-* `--tensorboard-log tensorboard-log`: save data about training to later generate a graph
+* `--tensorboard-log tensorboard-log`: save data about training to later generate a graph. [See this section.](https://github.com/cherrisimo/oekolopoly-rl#generate-graphs)
 
 ### Train a certain agent more:
 
@@ -160,13 +160,13 @@ Following command leads to a localhost webpage where performance of different ag
 tensorboard --logdir tensorboard-log
 ```
 
-#### Overview of commands and folders which are accessed by default with their respective implementations/files:
+### Overview of commands and folders:
 
-Command | Default Folder | File
------------- | ------------- | -------------
-train | logs | train.py
-enjoy | rl-trained-agents | enjoy.py
-benchmark | rl-trained-agents | in main branch or logs/benchmark/benchmark.md
+Command      | Default Folder    | Path to File/Implementation
+------------ | -------------     | -------------
+train        | logs              | rl-baselines3-zoo/train.py
+enjoy        | rl-trained-agents | rl-baselines3-zoo/enjoy.py
+benchmark    | rl-trained-agents | rl-baselines3-zoo/benchmark.md or logs/benchmark/benchmark.md
 
 
 ## Optional requirements
