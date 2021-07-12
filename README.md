@@ -148,9 +148,9 @@ Generate benchmark for all agents used on own custom environment:
 python -m utils.benchmark --log-dir oekolopoly_agents
 ```
 
-**Note 1**: Oftentimes the generating of the benchmark fails and the loading of the table in the command prompt "freezes". A solution for now is moving own agents to the `rl-trained-agents` directory and deleting the rest in order to see only chosen agents in comparison.
+***Note 1***: Oftentimes the generating of the benchmark fails and the loading of the table in the command prompt "freezes". A solution for now is moving own agents to the `rl-trained-agents` directory and deleting the rest in order to see only chosen agents in comparison.
 
-**Note 2**: Generating benchmark for own agents from the `logs` directory is not possible because it clashes with the `benchmark` folder there - either loading "freezes" or it starts generating a benchmark for *ALL* trained agents which takes all too long. 
+***Note 2***: Generating benchmark for own agents from the `logs` directory is not possible because it clashes with the `benchmark` folder there - either loading "freezes" or it starts generating a benchmark for *ALL* trained agents which takes all too long. 
 
 ### Generate graphs
 
@@ -161,6 +161,8 @@ tensorboard --logdir tensorboard-log
 ```
 
 ### Overview of commands and folders:
+
+Following table lists folders which are accessed per default by the respective command and which file is being invoked/altered as a result.
 
 Command      | Default Folder    | Path to File/Implementation
 ------------ | -------------     | -------------
