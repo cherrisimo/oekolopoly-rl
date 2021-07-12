@@ -106,14 +106,16 @@ Optionally create a folder to store each trained agent. A further folder named a
 ```
 If not done, `logs` stores the newly trained agents per default.
 
+*Following commands should always be executed while being in the repo folder `rl-baselines3-zoo`:*
 ### Train an agent:
 
 ```shell
-python train.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents
+python train.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents --tensorboard-log tensorboard-log
 ```
 * `--algo`: specifies the algorithm to be executed
 * `--env`: name of environment
 * `-f`: save agent to desired folder. If not defined, `logs` is used as the default path, therefore it's an optional paramater.
+* `--tensorboard-log tensorboard-log`: save data about training to later generate a graph
 
 ### Train a certain agent more:
 
@@ -140,7 +142,8 @@ python -m utils.benchmark --log-dir rl-trained-agents
 ```
 * `--log-dir`: specify folder with agents
 
-Generate benchmark for all agents used on custom environment:
+Generate benchmark for all agents used on own custom environment:
+
 ```shell
 python -m utils.benchmark --log-dir oekolopoly_agents
 ```
@@ -149,8 +152,15 @@ python -m utils.benchmark --log-dir oekolopoly_agents
 
 **Note 2**: Generating benchmark for own agents from the `logs` directory is not possible because it clashes with the `benchmark` folder there - either loading "freezes" or it starts generating a benchmark for *ALL* trained agents which takes all too long. 
 
+### Generate graphs
 
-Overview of commands and folders which are accessed by default with their respective implementations/files:
+Following command leads to a localhost webpage where performance of different agents can be seen:
+
+```shell
+tensorboard --logdir tensorboard-log
+```
+
+#### Overview of commands and folders which are accessed by default with their respective implementations/files:
 
 Command | Default Folder | File
 ------------ | ------------- | -------------
