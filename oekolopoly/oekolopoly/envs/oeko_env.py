@@ -378,11 +378,6 @@ class OekoEnv(gym.Env):
                     self.V[i] = max( self.Vmin[i], min( self.Vmax[i],  self.V[i]))
                     done = True
             
-            if  self.V[self.POINTS] <  0:
-                self.V[self.POINTS] = 0
-                done = True
-                done_info = 'Minimale Anzahl von Aktionspunkten erreicht'
-            
             if  self.V[self.ROUND] == 30:
                 done = True
                 done_info = 'Maximale Anzahl von Runden erreicht'
@@ -401,6 +396,11 @@ class OekoEnv(gym.Env):
                 self.V[self.POINTS] += boxB
                 self.V[self.POINTS] += boxC
                 self.V[self.POINTS] += boxD
+                
+            if  self.V[self.POINTS] < 0:
+                self.V[self.POINTS] = 0
+                done = True
+                done_info = 'Minimale Anzahl von Aktionspunkten erreicht'
                 
             if  self.V[self.POINTS] > 36:
                 self.V[self.POINTS] = 36
