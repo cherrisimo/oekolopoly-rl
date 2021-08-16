@@ -13,9 +13,9 @@ A repository aimed at performing different RL-Algorithms on the custom environme
  
 ## Installing
 
-Notice: **Python 3.8** is the required version of python because of the module [pytype](https://github.com/cherrisimo/pytype). Also please use the [environment](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly) provided in **this repository** as it is the freshest version of the game Oekolopoly.
+[!IMPORTANT] **Python 3.8** is the required version of python because of the module [pytype](https://github.com/cherrisimo/pytype). Also please use the [environment](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly) provided in **this repository** as it is the most fresh version of the game Oekolopoly.
 
-#### Let's get started: 
+### Let's get started: 
 1. Create a new environment with **tensorflow** and the required Python version installed as followed:
 
 ```shell
@@ -44,7 +44,7 @@ conda install git
 
 RL-Baselines3-Zoo contains further repositories. In one of them reside the over 100+ trained agents. The argument `--recursive` is used to clone them as well.
 
-<sub>Note: As of now not sure how to clone the repository with its sub-repos using GitHub Desktop and not aware if there would be any repercussions when the sub-repos are missing. </sub>
+[!NOTE] As of now not sure how to clone the baselines repository with its sub-repos using GitHub Desktop and not aware if there would be any repercussions when the sub-repos are missing. 
 
 4. Clone respective repository with its sub-repos:
 ```shell
@@ -107,7 +107,7 @@ Optionally create a folder to store each trained agent. A further folder named a
 ```
 If not done, `logs` stores the newly trained agents per default.
 
-*Following commands should always be executed while being in the repo folder `rl-baselines3-zoo`:*
+[!IMPORTANT] Following commands should always be executed while being in the repo folder `rl-baselines3-zoo`:
 ### Train an agent:
 
 ```shell
@@ -125,7 +125,7 @@ python train.py --algo ppo --env OekolopolyBox-v0 -i oekolopoly_agents/ppo/Oekol
 ```
 * `-i`: path to the particular agent
 
-### See trained agent in action using:
+### See trained agent in action:
 
 ```shell
 python enjoy.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents --exp-id 9
@@ -135,7 +135,9 @@ python enjoy.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents --exp-id 
 
 ### Benchmarks
 
-The table shown in `benchmark.md` includes only agents with highest performance (not quantatively evaluated). In order to see own trained agent amongst the ones from baselines, the folder of the wished agent should be pasted to the `rl-trained-agents` directory. For example the first agent trained with PPO should be displayed in the benchmark table, this requires the folder `OekolopolyBox-v0_1` to be included in the already said directory. Path: **oekolopoly_agents** -> **ppo** -> **OekolopolyBox-v0_1**
+The table in `benchmark.md` displays only agents with the highest performance (not quantatively evaluated as stated by RL Baselines3 Zoo). In order to see own trained agent in comparison with the ones from baselines, the folder of the wished agent should be pasted to the `rl-trained-agents` directory. For example the first agent trained with PPO is to be displayed in the benchmark table, thus requiring the folder of the agent `OekolopolyBox-v0_1` to be moved to `rl-trained-agents`. 
+
+Path to agent's folder: **oekolopoly_agents** -> **ppo** -> **OekolopolyBox-v0_1**
 
 Now generate benchmark:
 
@@ -150,9 +152,9 @@ Generate benchmark for all agents used on own custom environment:
 python -m utils.benchmark --log-dir oekolopoly_agents
 ```
 
-***Note 1***: Oftentimes the generating of the benchmark fails and the loading of the table in the command prompt "freezes". A solution for now is moving own agents to the `rl-trained-agents` directory and deleting the rest in order to see only chosen agents in comparison.
+[!NOTE] Oftentimes the generating of the benchmark fails and the loading of the table in the command prompt "freezes". A solution for now is moving own agents to the `rl-trained-agents` directory and deleting the rest in order to see only chosen agents in comparison.
 
-***Note 2***: Generating benchmark for own agents from the `logs` directory is not possible because it clashes with the `benchmark` folder there - either loading "freezes" or it starts generating a benchmark for *ALL* trained agents which takes all too long. 
+[!NOTE] Generating benchmark for own agents from the `logs` directory is not possible because it clashes with the `benchmark` folder there - either loading "freezes" or it starts generating a benchmark for *ALL* trained agents which takes all too long. 
 
 ### Generate graphs
 
