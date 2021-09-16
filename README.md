@@ -32,9 +32,9 @@ conda install -c anaconda tensorflow
 
 ```shell
 conda activate env_name
-conda install -c forge pytype
-conda install -c forge pybullet
-conda install -c forge box2d-py
+conda install -c conda-forge pytype
+conda install -c conda-forge pybullet
+conda install -c conda-forge box2d-py
 ```
 
 3. Install git:
@@ -89,8 +89,14 @@ OekolopolyBox-v0:
 
 3. If custom environment is not yet installed, now it can be done:
 
-```
+```shell
 pip install -e .
+```
+
+4. Install pyglet for rendering functions in the environment:
+
+```shell
+pip install pyglet
 ```
 
 Optionally create a folder to store each trained agent. A further folder named after the used algorithm for the trained agent should reside in it as shown below:
@@ -133,6 +139,8 @@ python enjoy.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents --exp-id 
 * `--exp-id 9`: enjoy a particular agent. If not defined, the last trained agent is called per default, therefore it's an optional paramater.
 * `-f`: assigning the folder is optional
 
+## Analyse and compare agents
+
 ### Benchmarks
 
 The table in `benchmark.md` displays only agents with the highest performance (not quantatively evaluated as stated by RL Baselines3 Zoo). In order to see own trained agent in comparison with the ones from baselines, the folder of the wished agent should be pasted to the `rl-trained-agents` directory. For example the first agent trained with PPO is to be displayed in the benchmark table, thus requiring the folder of the agent `OekolopolyBox-v0_1` to be moved to `rl-trained-agents`. 
@@ -156,15 +164,15 @@ python -m utils.benchmark --log-dir oekolopoly_agents
 
 [!NOTE] Generating benchmark for own agents from the `logs` directory is not possible because it clashes with the `benchmark` folder there - either loading "freezes" or it starts generating a benchmark for *ALL* trained agents which takes all too long. 
 
-### Generate graphs
+### Tensorboard
 
-Following command leads to a localhost webpage where performance of different agents can be seen:
+Following command leads to a localhost webpage where performance of different agents is showcased via graphs:
 
 ```shell
 tensorboard --logdir tensorboard-log
 ```
 
-### Overview of commands and folders:
+## Overview of commands and folders:
 
 Following table lists folders which are accessed per default by the respective command and which file is being invoked/altered as a result.
 
