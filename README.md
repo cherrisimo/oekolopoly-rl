@@ -86,7 +86,16 @@ OekolopolyBox-v0:
   learning_rate: lin_0.001
   clip_range: lin_0.2
 ```
-
+2a. Add a wrapper to environment: 
+```python
+env_wrapper:
+  - utils.wrappers.OekoBoxWrapper
+#  - utils.wrappers.OekoEnvSimpleWrapper
+#  - utils.wrappers.OekoSimpleObsWrapper
+#  - utils.wrappers.OekoRewardWrapper
+```
+Here the Box Wrapper is used as example. Adding each wrapper as argument in the hyperparamter list does not require registering it as new environment. All wrappers are to be found under `utils/wrappers.py`. The implementation of each wrapper can be found in [wrappers.py](https://github.com/cherrisimo/oekolopoly-rl/blob/main/wrappers/wrappers.py) in this repository. 
+    
 3. If custom environment is not yet installed, now it can be done:
 
 ```shell
