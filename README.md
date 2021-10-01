@@ -209,10 +209,9 @@ This section is relevant in case there are further errors and therefore RL-Basel
    <img src="images/envvar.png" align="center" width="40%"/>
    
    ## TO DO
-   -  [ ] Test giving reward only at the end of the game, meaning it receives only incentive if the agent has played between 10 and 30 rounds. Reward should be calculated as in the original game.
-   -  [ ] Develop further Wrapper to split the observation space in low-medium-high
-   -  [ ] Develop another Wrapper to split action in three sectors which are to be distributed among the 5 Life Areas
-   -  [ ] Test different reward systems on PPO, A2C, DDPG, TD3, SAC
+   -  [ x] Develop further Wrapper to split the observation space in low-medium-high
+   -  [x ] Develop another Wrapper to split action in three sectors which are to be distributed among the 5 Life Areas
+   -  [ ] Test and compare original and help reward on PPO, A2C, DDPG, TD3, SAC with wrappers
    
    ## Resources
    * [Stable Baselines3](https://stable-baselines3.readthedocs.io/en/master/guide/rl_zoo.html)
