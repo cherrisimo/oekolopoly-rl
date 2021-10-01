@@ -86,7 +86,7 @@ OekolopolyBox-v0:
   learning_rate: lin_0.001
   clip_range: lin_0.2
 ```
-2a. Add a wrapper to environment: 
+ 2a. Add a wrapper to environment: 
 ```python
 env_wrapper:
   - utils.wrappers.OekoBoxWrapper
