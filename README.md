@@ -209,8 +209,8 @@ This section is relevant in case there are further errors and therefore RL-Basel
    <img src="images/envvar.png" align="center" width="40%"/>
    
    ## TO DO
-   -  [ x] Develop further Wrapper to split the observation space in low-medium-high
-   -  [x ] Develop another Wrapper to split action in three sectors which are to be distributed among the 5 Life Areas
+   -  [x] Develop further Wrapper to split the observation space in low-medium-high
+   -  [x] Develop another Wrapper to split action in three sectors which are to be distributed among the 5 Life Areas
    -  [ ] Test and compare original and help reward on PPO, A2C, DDPG, TD3, SAC with wrappers
    
    ## Resources
