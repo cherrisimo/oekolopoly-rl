@@ -25,4 +25,4 @@ Dieser Wrapper übersetzt den Zustandsraum in niedrig-mittel-hoch und damit erge
 Der Wrapper fügt einen Hilfsreward zum Environment hinzu. Die Belohnung hat zum Ziel, die Bereiche Produktion und Belohnung in mittleren Werten zu halten.
 
 ## Usage
-Die Datei `wrappers.py` enthält die Wrappers für die Umgebung Ökolopoly und die Environments von RL Baselines Zoo3. Sie kann direkt anstelle der originalen im Ordner `utils` gesetzt werden. Instruktionen wie Wrappers zur Umgebung hinzugefügt werden können, sind im Haupt-[README](https://github.com/cherrisimo/oekolopoly-rl/blob/main/README.md) unter Punkt 2a enthalten.
+Die Datei `wrappers.py` enthält die Wrappers für die Umgebung Ökolopoly und die Environments von RL Baselines Zoo3. Sie kann direkt anstelle der originalen im Ordner `utils` gesetzt werden. Instruktionen wie Wrappers zur Umgebung hinzugefügt werden können, sind im Haupt-[README](https://github.com/cherrisimo/oekolopoly-rl#usage) unter Punkt 2a enthalten.
