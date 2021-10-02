@@ -17,7 +17,7 @@ Dieser Wrapper übersetzt den Zustandsraum in niedrig-mittel-hoch und damit erge
  ```python 
  obs[0] = floor ( 1 / 29 * 3)
  ```
- Sanierung ist der erste Bereich und wegen ihrem aktuellen Wert 1 ist der niegrigste Klasse gleich 0. Auf deise Weise werden alle Bereiche aktualisiert. 
+ Sanierung ist der erste Bereich und wegen ihrem aktuellen Wert 1 ist der niegrigste Klasse gleich 0. Auf deise Weise werden die Werte aller Bereiche aktualisiert. 
  Zusätzlich kann die Anzahl der Observations und der Klassen, nach deren sich jede einzelne Observation teilt (hier niedrig-mittel-hoch), durch die Variablen `obs_count` und `obs_split` eingestellt werden. Anschließend verfügt der Agent über den umgewandelten Zustand.
 
 ### **OekolopolyBoxReward** 
