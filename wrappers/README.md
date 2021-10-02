@@ -18,12 +18,12 @@ Dieser Wrapper übersetzt den Zustandsraum in niedrig-mittel-hoch und damit erge
  obs[0] = floor ( 1 / 29 * 3)
  ```
  Sanierung ist der erste Bereich und wegen ihrem aktuellen Wert 1 ist der niegrigste Klasse gleich 0. Auf deise Weise werden alle Bereiche aktualisiert. 
- Zusätzlich kann die Anzahl der Observations und der Klassen, nach deren sich jedes einzelne Observation teilt, durch die Variablen `obs_count` und `obs_split` eingestellt werden. Anschließend verfügt der Agent über den umgewandelten Zustand.
+ Zusätzlich kann die Anzahl der Observations und der Klassen, nach deren sich jede einzelne Observation teilt (hier niedrig-mittel-hoch), durch die Variablen `obs_count` und `obs_split` eingestellt werden. Anschließend verfügt der Agent über den umgewandelten Zustand.
 
 ### **OekolopolyBoxReward** 
 *Klassenname: OekoRewardWrapper – `Reward Wrapper`*
 
-Der Wrapper fügt einen Hilfsreward zum Environment hinzu. Die Belohnung hat zum Ziel, die Bereiche Produktion und Belohnung in mittleren Werten zu halten.
+Der Wrapper fügt einen Hilfsreward zum Environment hinzu. Die Belohnung hat zum Ziel, die Bereiche Produktion und Bevölkerung in mittleren Werten zu halten.
 
 ## Usage
 Die Datei `wrappers.py` enthält die Wrappers für die Umgebung Ökolopoly und die Environments von RL Baselines Zoo3. Sie kann direkt anstelle der originalen im Ordner `utils` gesetzt werden. Instruktionen wie Wrappers zur Umgebung hinzugefügt werden können, sind im Haupt-[README](https://github.com/cherrisimo/oekolopoly-rl#usage) unter Punkt 2a enthalten.
