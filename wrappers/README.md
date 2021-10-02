@@ -18,8 +18,7 @@ Dieser Wrapper übersetzt den Zustandsraum in niedrig-mittel-hoch und damit erge
  obs[0] = floor ( 1 / 29 * 3)
  ```
  Sanierung ist der erste Bereich und wegen ihrem aktuellen Werte ist der niegrigste Klasse gleich 0. Auf deise Weise werden alle Bereiche aktualisiert. 
- Zusätzlich kann die Anzahl der Observations und der Klassen, nach deren sich jedes einzelne Observation teilt, durch die Variablen `obs_count` und `obs_split` eingestellt werden.         
- Anschließend verfügt der Agent über den umgewandelten Zustandsraum.
+ Zusätzlich kann die Anzahl der Observations und der Klassen, nach deren sich jedes einzelne Observation teilt, durch die Variablen `obs_count` und `obs_split` eingestellt werden. Anschließend verfügt der Agent über den umgewandelten Zustandsraum.
 
 ### **OekolopolyBoxReward** 
 *Klassenname: OekoRewardWrapper – `Reward Wrapper`*
