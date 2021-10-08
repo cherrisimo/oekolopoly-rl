@@ -13,7 +13,7 @@ Der Wrapper reduziert signifikant den Aktionsraum mit insgesamt 88 Aktionen verf
 ### **OekolopolySimpleObsBox** 
 *Klassenname: OekoSimpleObsWrapper – `Observation Wrapper`, `MultiDiscrete`*
 
-Dieser Wrapper übersetzt den Zustandsraum in niedrig-mittel-hoch und damit ergeben sich insgesamt 6561 Zustände. Jeder Zustand soll Werte von 0 bis 2 umfangen. Um berechnet zu werden, welcher Wert der bestimmte Bereich annehmen soll, wird seiner aktuelle Wert durch den maximalen geteilt und mit 3 multipliziert. Zum Beispiel:
+Dieser Wrapper übersetzt den Zustandsraum in niedrig-mittel-hoch und damit ergeben sich insgesamt 6561 Zustände. Um berechnet zu werden, welcher Wert der bestimmte Bereich annehmen soll, wird seiner aktuelle Wert durch den maximalen geteilt und mit 3 multipliziert. Zum Beispiel:
  ```python 
  obs[0] = floor ( 1 / 29 * 3)
  ```
