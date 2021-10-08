@@ -1,7 +1,9 @@
+from math import floor
 import gym
 import numpy as np
 from sb3_contrib.common.wrappers import TimeFeatureWrapper  # noqa: F401 (backward compatibility)
 from scipy.signal import iirfilter, sosfilt, zpk2sos
+
 
 import math
 
@@ -28,34 +30,10 @@ class OekoBoxWrapper(gym.ActionWrapper):
 
         return r
 
-    def distribute2 (action, points, used_points_p):
-    points = round (points * used_points_p)
-
-    action = list (action)
-    action_sum = sum (action)
-    if action_sum == 0:
-        action = [1] * len (action)
-        action_sum = sum (action)
-
-    for i in range (len (action)):
-        action[i] /= action_sum
-
-    r = []
-    for n in action:
-        r.append (round (n * points))
-
-    if sum (r) > points:
-        max_index = action.index (max (action))
-        r[max_index] -= 1
-    elif sum (r) < points:
-        max_index = action.index (max (action))
-        r[max_index] += 1
-
-    assert sum (r) == points
-
-    return r
 
     def __init__ (self, env):
+        print ("BOX WRAPPER INIT")
+
         super().__init__(env)
         self.action_min = np.float32 (np.array ([0, -1,  0,  0,  0, -1]))
         self.action_max = np.float32 (np.array ([1,  1,  1,  1,  1,  1]))
@@ -88,65 +66,64 @@ class OekoBoxWrapper(gym.ActionWrapper):
 
 
 class OekoEnvSimpleWrapper(gym.ActionWrapper):
-
     ACTIONS = [
-    '000000',
-    '000010',
-    '000020',
-    '000030',
-    '000100',
-    '000110',
-    '000120',
-    '000200',
-    '000210',
-    '000300',
-    '001000',
-    '001010',
-    '001020',
-    '001100',
-    '001110',
-    '001200',
-    '002000',
-    '002010',
-    '002100',
-    '003000',
-    '010000', '010001',
-    '010010', '010011',
-    '010020', '010021',
-    '010100', '010101',
-    '010110', '010111',
-    '010200', '010201',
-    '011000', '011001',
-    '011010', '011011',
-    '011100', '011101',
-    '012000', '012001',
-    '020000', '020001',
-    '020010', '020011',
-    '020100', '020101',
-    '021000', '021001',
-    '030000', '030001',
-    '100000',
-    '100010',
-    '100020',
-    '100100',
-    '100110',
-    '100200',
-    '101000',
-    '101010',
-    '101100',
-    '102000',
-    '110000', '110001',
-    '110010', '110011',
-    '110100', '110101',
-    '111000', '111001',
-    '120000', '120001',
-    '200000',
-    '200010',
-    '200100',
-    '201000',
-    '210000', '210001',
-    '300000',
-]
+        '000000',
+        '000010',
+        '000020',
+        '000030',
+        '000100',
+        '000110',
+        '000120',
+        '000200',
+        '000210',
+        '000300',
+        '001000',
+        '001010',
+        '001020',
+        '001100',
+        '001110',
+        '001200',
+        '002000',
+        '002010',
+        '002100',
+        '003000',
+        '010000', '010001',
+        '010010', '010011',
+        '010020', '010021',
+        '010100', '010101',
+        '010110', '010111',
+        '010200', '010201',
+        '011000', '011001',
+        '011010', '011011',
+        '011100', '011101',
+        '012000', '012001',
+        '020000', '020001',
+        '020010', '020011',
+        '020100', '020101',
+        '021000', '021001',
+        '030000', '030001',
+        '100000',
+        '100010',
+        '100020',
+        '100100',
+        '100110',
+        '100200',
+        '101000',
+        '101010',
+        '101100',
+        '102000',
+        '110000', '110001',
+        '110010', '110011',
+        '110100', '110101',
+        '111000', '111001',
+        '120000', '120001',
+        '200000',
+        '200010',
+        '200100',
+        '201000',
+        '210000', '210001',
+        '300000',
+    ]
 
     def __init__ (self, env):
         super().__init__(env)
@@ -154,8 +131,11 @@ class OekoEnvSimpleWrapper(gym.ActionWrapper):
 
 
     def action (self, act):
+        action_index = act[0]
+        extra_points = act[1]
+
         points = self.V[self.POINTS]
-        act_string = ACTIONS[act[0]]
+        act_string = self.ACTIONS[action_index]
         regions = [0,0,0,0,0]
 
         remaining = 0
@@ -188,19 +168,20 @@ class OekoEnvSimpleWrapper(gym.ActionWrapper):
 
         assert used_points <= points
 
-        act = np.append (regions, act[1])
+        act = np.append (regions, extra_points)
         for i in range(5): act[i] -= self.Amin[i]
         return act
-        
-        
+
+
 class OekoSimpleObsWrapper(gym.ObservationWrapper):
 
     def __init__ (self, env):
         super().__init__(env)
-        self.obs_count = 8  # stands for number of observations
+        self.obs_count = 8  # how many of the original observations to use, starting from the first one
         self.obs_split = 3  # 3=low/mid/high
 
         self.original_observation_space = self.observation_space
+        # self.observation_space = gym.spaces.MultiDiscrete ([3**obs_count])  # 6561
         self.observation_space = gym.spaces.MultiDiscrete ([3] * obs_count)  # 6561
 
 
@@ -208,6 +189,13 @@ class OekoSimpleObsWrapper(gym.ObservationWrapper):
         new_obs = [0] * obs_count
         for i in range(obs_count):
             new_obs[i] = math.floor (obs[i] / self.original_observation_space.nvec[i] * self.obs_split)
+
+        # string = ''
+        # for i in range(8):
+        #     string += str (new_obs[i])
+        # state = int (string, base=3)
+        #
+        # return state
 
         return new_obs
 
@@ -221,9 +209,11 @@ class OekoRewardWrapper(gym.RewardWrapper):
         bevoelkerung_reward = 23 - abs (24 - self.V[self.BEVOELKERUNG])
         rew = production_reward + bevoelkerung_reward
 
+        # if self.V[self.ROUND] >= 10:
+        #     rew = round (float(self.a / self.b), 2)
+
         return rew
 
-# === Baselines wrappers ===
 
 class DoneOnSuccessWrapper(gym.Wrapper):
     """
