@@ -150,9 +150,9 @@ python enjoy.py --algo ppo --env Oekolopoly-v0 -f oekolopoly_agents --exp-id 9
 
 ### Benchmarks
 
-The table in `benchmark.md` displays only agents with the highest performance (not quantatively evaluated as stated by RL Baselines3 Zoo). In order to see own trained agent in comparison with the ones from baselines, the folder of the wished agent should be pasted to the `rl-trained-agents` directory. For example the first agent trained with PPO is to be displayed in the benchmark table, thus requiring the folder of the agent `Oekolopoly-v0_1` to be moved to `rl-trained-agents`. 
+The table in `benchmark.md` displays only agents with the highest performance (not quantatively evaluated as stated by RL Baselines3 Zoo). In order to see own trained agent in comparison with the ones from baselines, the folder of the wished agent should be pasted to the `rl-trained-agents` directory. For example the first agent trained with PPO is to be displayed in the benchmark table, thus requiring the folder of the agent `Oekolopoly-v0_10` to be moved to `rl-trained-agents`. 
 
-Path to agent's folder: **oekolopoly_agents** -> **ppo** -> **Oekolopoly-v0_1**
+Path to agent's folder: **oekolopoly_agents** -> **ppo** -> **Oekolopoly-v0_10**
 
 Now generate benchmark:
 
