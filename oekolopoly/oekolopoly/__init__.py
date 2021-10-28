@@ -6,16 +6,8 @@ for env in env_dict:
     if 'Oekolopoly-v0' in env:
          #print("Remove {} from registry".format(env))
          del gym.envs.registration.registry.env_specs[env]
-    elif 'OekolopolyBox-v0' in env:
-         #print("Remove {} from registry".format(env))
-         del gym.envs.registration.registry.env_specs[env]
 
 register(
     id='Oekolopoly-v0',
     entry_point='oekolopoly.envs:OekoEnv',
-)
-
-register(
-    id='OekolopolyBox-v0',
-    entry_point='oekolopoly.envs:OekoBoxEnv',
 )
