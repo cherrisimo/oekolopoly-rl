@@ -191,8 +191,10 @@ benchmark    | rl-trained-agents | rl-baselines3-zoo/benchmark.md or logs/benchm
 
 ## Manual evaluation of agents
 
-The contents of folder [eval](https://github.com/cherrisimo/oekolopoly-rl/blob/main/eval) must be copied to the the `rl-baselines3-zoo` directory. In the command prompt navigate to the `rl-baselines3-zoo` directory and start the evaluation program using `python play.py`.  
-
+The contents of folder [eval](https://github.com/cherrisimo/oekolopoly-rl/blob/main/eval) must be copied to the the `rl-baselines3-zoo` directory. In the command prompt navigate to the `rl-baselines3-zoo` directory and start the evaluation program using
+```shell
+python play.py
+```
 
 ## Optional requirements
 
