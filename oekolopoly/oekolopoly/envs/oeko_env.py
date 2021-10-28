@@ -2,7 +2,7 @@ import oekolopoly.envs.get_boxes as gb
 import gym
 from gym import spaces
 import numpy as np
-from gym.envs.classic_control import rendering
+
 
 class OekoEnv(gym.Env):
     
@@ -16,7 +16,20 @@ class OekoEnv(gym.Env):
     POLITIK         = 7
     ROUND           = 8
     POINTS          = 9
-    
+
+    V_NAMES = [
+        "Sanierung",
+        "Produktion",
+        "Aufklärung",
+        "Lebensqualität",
+        "Vermehrungsrate",
+        "Umweltbelastung ",
+        "Bevölkerung",
+        "Politik",
+        "Round",
+        "Points",
+    ]
+
     ACT_NAMES = [
         'SANIERUNG',
         'PRODUKTION',
@@ -38,11 +51,23 @@ class OekoEnv(gym.Env):
     ]
 
     def __init__(self):
-        
-        self.viewer = None
-        
-        #                      0   1   2   3   4   5   6    7   9  10
-        #                      S   Pr  A   L   V   U   B    P   R  AP
+        self.viewer       = None
+ 
+        self.init_v = np.array([
+            1,  #0 Sanierung
+            12, #1 Produktion
+            4,  #2 Aufklärung
+            10, #3 Lebensqualität
+            20, #4 Vermehrungsrate
+            13, #5 Umweltbelastung 
+            21, #6 Bevölkerung
+            0,  #7 Politik
+            0,  #8 Round
+            8,  #9 Points
+        ])
+
+        #                      0   1   2   3   4   5   6    7   8   9
+        #                      S   Pr  A   L   V   U   B    P   R   AP
         self.Vmin = np.array([ 1,  1,  1,  1,  1,  1,  1, -10,  0,  0])
         self.Vmax = np.array([29, 29, 29, 29, 29, 29, 48,  37, 30, 36])
 
@@ -59,43 +84,36 @@ class OekoEnv(gym.Env):
         ])
         
         self.observation_space = spaces.MultiDiscrete([
-            29,    # 0 Sanierung 
-            29,    # 1 Produktion
-            29,    # 2 Aufklärung
-            29,    # 3 Lebensqualität
-            29,    # 4 Vermehrungsrate
-            29,    # 5 Umweltbelastung
-            48,    # 6 Bevölkerung
-            48,    # 7 Politik
-            31,    # 8 Runde
-            37,    # 9 Aktionspunkte für nächste Runde
+            29,   # 0 Sanierung 
+            29,   # 1 Produktion
+            29,   # 2 Aufklärung
+            29,   # 3 Lebensqualität
+            29,   # 4 Vermehrungsrate
+            29,   # 5 Umweltbelastung
+            48,   # 6 Bevölkerung
+            48,   # 7 Politik
+            31,   # 8 Runde
+            37,   # 9 Aktionspunkte für nächste Runde
         ])
-
     
     def render (self, mode='human'):
+        from gym.envs.classic_control import rendering
+        import pyglet
 
         if self.viewer is None:
             self.viewer_w = 500
             self.viewer_h = 500
             self.viewer = rendering.Viewer(self.viewer_w, self.viewer_h)
             self.viewer.set_bounds (0, self.viewer_w, 0, self.viewer_h)
-            # self.icon = pyglet.image.load('b.png')
-            # self.sprite = pyglet.sprite.Sprite(self.icon, x=50, y=50)
 
-        t      = 0.0 
+        t      = 0.0
         t_step = 0.1 # speed of animation
         t_end  = 3.0 # pause time -1 after every step
-
-        
 
         while t < t_end:
             self.render_rounds (5,  485, min (t, 1.0)) # progress line, shows number of round
             self.render_action (50,  70, min (t, 1.0)) # 2nd balkeniagramm, A (positionHorizontal, positionVertical, time)
             self.render_vector (50, 200, min (t, 1.0)) # 1st balkeniagramm, V
-            # self.sprite.draw()
-            # self.icon.blit(100, 100)
-            # name = pyglet.text.Label(text='OK', font_size=36, x=50, y=100, color=(0,0,0,255)) 
-            # name.draw()
 
             self.viewer.render (False)
             t += t_step
@@ -209,7 +227,8 @@ class OekoEnv(gym.Env):
                 (x+w, y+h),
                 (x,   y+h),
             ], color=(r, g, b))
-    
+
+
     def update_values (self, V, action):
     
         done = False
@@ -327,25 +346,24 @@ class OekoEnv(gym.Env):
             if self.V[self.LEBENSQUALITAET] not in range (1, 30):
                 done = True
                 done_info = "Lebensqualitaet ist außerhalb des zulässigen Ranges"
-        
+
         return  self.V, done, done_info
     
     
-    def step(self, action):
+    def step (self, action):
         assert self.action_space.contains (action), f"AssertionError: action not in action_space: {action}"
 
         # Transform action space
-        action += self.Amin
+        action = action + self.Amin
         self.prev_action = self.curr_action
         self.curr_action = action.copy ()
         
         # Init
         done = False
-        self.valid_turn = 1
         self.reward = 0
+        self.reward_points = 0
         self.balance = 0
         used_points = 0
-        self.rew_points=0
         
         # Sum points from action
         used_points += action[self.SANIERUNG]
@@ -354,80 +372,74 @@ class OekoEnv(gym.Env):
         used_points += action[self.LEBENSQUALITAET]
         used_points += action[self.VERMEHRUNGSRATE]
 
-
+        if used_points < 0 or used_points > self.V[self.POINTS]:
+            return self.obs, self.reward, done, {'balance': self.balance, 'done_reason': None, 'reward_points': self.reward_points}
         assert used_points >= 0 and used_points <= self.V[self.POINTS], f"AssertionError: action takes to many points: action={action} POINTS={self.V[self.POINTS]})"
 
-        if self.valid_turn:
-            for i in range(5):
-                assert (self.V[i] + action[i]) in range (self.Vmin[i], self.Vmax[i] + 1), f"AssertionError: action puts region out of action[{i}]: action={action} V={self.V}"
-                
+        for i in range(5):
+            if self.V[i] + action[i] not in range (self.Vmin[i], self.Vmax[i] + 1):
+                return self.obs, self.reward, done, {'balance': self.balance, 'done_reason': None, 'reward_points': self.reward_points}
+            assert (self.V[i] + action[i]) in range (self.Vmin[i], self.Vmax[i] + 1), f"AssertionError: action puts region out of action[{i}]: action={action} V={self.V}"
 
-        if self.valid_turn:
-            for i in range(5): self.V[i] += action[i]
+        # The turn is valid
 
-            # Update boxes and V accordingly
-            self.V, done, done_info = self.update_values(self.V, action)
-             
-            # Update points and round 
-            self.V[self.POINTS] -= used_points            
-            self.V[self.ROUND] += 1
-            
-            # Clip values if not in range
-            for i in range(8):
-                if  self.V[i] not in range (self.Vmin[i],  self.Vmax[i] + 1):
-                    self.V[i] = max( self.Vmin[i], min( self.Vmax[i],  self.V[i]))
-                    done = True
-            
-            if  self.V[self.ROUND] == 30:
+        for i in range(5): self.V[i] += action[i]
+
+        # Update boxes and V accordingly
+        self.V, done, done_info = self.update_values(self.V, action)
+
+        # Update points and round 
+        self.V[self.POINTS] -= used_points            
+        self.V[self.ROUND] += 1
+
+        # Clip values if not in range
+        for i in range(8):
+            if  self.V[i] not in range (self.Vmin[i],  self.Vmax[i] + 1):
+                self.V[i] = max( self.Vmin[i], min( self.Vmax[i],  self.V[i]))
                 done = True
-                done_info = 'Maximale Anzahl von Runden erreicht'
-            
-            # Points for next round
-            if done:
-                self.V[self.POINTS] = 0
-            else:
-                boxA  = gb.get_boxA  (self.V[self.BEVOELKERUNG])
-                boxB  = gb.get_boxB  (self.V[self.POLITIK])
-                boxC  = gb.get_boxC  (self.V[self.PRODUKTION])
-                boxV  = gb.get_boxV  (self.V[self.PRODUKTION])
-                boxD  = gb.get_boxD  (self.V[self.LEBENSQUALITAET])
-            
-                self.V[self.POINTS] += boxA * boxV
-                self.V[self.POINTS] += boxB
-                self.V[self.POINTS] += boxC
-                self.V[self.POINTS] += boxD
-                
-            if  self.V[self.POINTS] < 0:
-                self.V[self.POINTS] = 0
-                done = True
-                done_info = 'Minimale Anzahl von Aktionspunkten erreicht'
-                
-            if  self.V[self.POINTS] > 36:
-                self.V[self.POINTS] = 36
-                done = True
-                done_info = 'Maximale Anzahl von Aktionspunkten erreicht'
 
+        if  self.V[self.ROUND] == 30:
+            done = True
+            done_info = 'Maximale Anzahl von Runden erreicht'
 
-            boxD  = gb.get_boxD  (self.V[self.LEBENSQUALITAET])                
-            a = float( (boxD*3 + self.V[self.POLITIK]) * 10)
-            self.rew_points = int(a)
-            
-            if done:
-                b = float(self.V[self.ROUND] + 3)
-                #print(a,b,a/b)
-                self.balance = round(float(a/b), 2)
-                
-                if self.V[self.ROUND] in range(10, 31):
-                    self.reward = self.balance
-                else:
-                    self.reward = 0
-                
+        # Points for next round
+        if done:
+            self.V[self.POINTS] = 0
         else:
-            self.valid_turn = 0
-            done_info = 'Ungültiger Zug'
+            boxA  = gb.get_boxA  (self.V[self.BEVOELKERUNG])
+            boxB  = gb.get_boxB  (self.V[self.POLITIK])
+            boxC  = gb.get_boxC  (self.V[self.PRODUKTION])
+            boxV  = gb.get_boxV  (self.V[self.PRODUKTION])
+            boxD  = gb.get_boxD  (self.V[self.LEBENSQUALITAET])
 
-        if not self.valid_turn:
-            raise ValueError ("ValueError: Ungültiger Zug")
+            self.V[self.POINTS] += boxA * boxV
+            self.V[self.POINTS] += boxB
+            self.V[self.POINTS] += boxC
+            self.V[self.POINTS] += boxD
+
+        if  self.V[self.POINTS] < 0:
+            self.V[self.POINTS] = 0
+            done = True
+            done_info = 'Minimale Anzahl von Aktionspunkten erreicht'
+
+        if  self.V[self.POINTS] > 36:
+            self.V[self.POINTS] = 36
+            done = True
+            done_info = 'Maximale Anzahl von Aktionspunkten erreicht'
+
+        boxD  = gb.get_boxD  (self.V[self.LEBENSQUALITAET])
+        self.a = float ((boxD*3 + self.V[self.POLITIK]) * 10)
+        self.reward_points = int (self.a)
+        self.b = float(self.V[self.ROUND] + 3)
+
+        if done:
+            self.balance = round (float(self.a / self.b), 2)
+
+            if self.V[self.ROUND] in range(10, 31):
+                self.reward = self.balance
+            else:
+                self.reward = 0
+
 
         # Transform V in obs
         self.obs = self.V - self.Vmin
@@ -435,37 +447,35 @@ class OekoEnv(gym.Env):
 
         # if done_info == None:
         #    done_info = "Das Spiel setzt fort."
+
+        #if not done: self.reward = 1
         
-        if not done:
-            production_reward   = 14 - abs (15 - self.V[self.PRODUKTION])
-            bevoelkerung_reward = 23 - abs (24 - self.V[self.BEVOELKERUNG])
-            self.reward = production_reward + bevoelkerung_reward
+        #if not done: self.reward = self.reward_points
+        
+        # if not done:
+            # production_reward   = 14 - abs (15 - self.V[self.PRODUKTION])
+            # bevoelkerung_reward = 23 - abs (24 - self.V[self.BEVOELKERUNG])
+            # self.reward = production_reward + bevoelkerung_reward
 
         self.prev_result = self.curr_result
         self.curr_result = self.V.copy ()
+        
+        print("Reward_points:", self.reward_points)
+        print("Balance:", self.balance)
+        print("Reward:", self.reward)
 
-        return self.obs, self.reward, done, {'balance': self.balance, 'done_reason': done_info, 'rew_points': self.rew_points}
+        return self.obs, self.reward, done, {'balance': self.balance, 'done_reason': done_info, 'reward_points': self.reward_points}
+
+
+    def set_v (self, init_v):
+        self.init_v = init_v
 
 
     def reset(self):
-        self.valid_turn = True
-        
-        self.V = np.array([
-            1,  #0 Sanierung
-            12, #1 Produktion
-            4,  #2 Aufklärung
-            10, #3 Lebensqualität
-            20, #4 Vermehrungsrate
-            13, #5 Umweltbelastung 
-            21, #6 Bevölkerung
-            0,  #7 Politik
-            0,  #8  Round
-            8,  #9 Points
-        ])
-        
+        self.V = self.init_v.copy ()
         self.curr_action = np.zeros (self.action_space.shape[0], 'int64')
         self.curr_result = self.V.copy ()
-        
+
         self.obs = self.V - self.Vmin
         assert self.observation_space.contains (self.obs), "AssertionError: obs not in observation_space"
         
