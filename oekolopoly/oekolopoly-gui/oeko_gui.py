@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPixmap, QIcon, QFont
+from PyQt5.QtGui import QPixmap, QIcon, QFont, QColor
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QSlider, QLabel, QTableWidget, QTableWidgetItem, QHBoxLayout, QVBoxLayout, QGridLayout
 
 import gym
@@ -111,14 +111,23 @@ def step (step_button, env, action_sliders, obs_table, obs_status, points_label)
     for action_slider in action_sliders:
         action.append (action_slider.value)
 
+
     action[env.PRODUKTION] -= env.Amin[env.PRODUKTION]
     action[5] -= env.Amin[5]
-    try:
-        obs, reward, done, info = env.step (action)
-        valid_move = True
-    except ValueError as e:
-        obs_status.setText (str(e))
+    current_round = env.V[env.ROUND]
+    obs, reward, done, info = env.step (action)
+
+    if not done and current_round == env.V[env.ROUND]:
         valid_move = False
+    else:
+        valid_move = True
+        
+    # try:
+    #     obs, reward, done, info = env.step (action)
+    #     valid_move = True
+    # except ValueError as e:
+    #     obs_status.setText (str(e))
+    #     valid_move = False
 
     if valid_move:
         if done:
@@ -133,9 +142,7 @@ def step (step_button, env, action_sliders, obs_table, obs_status, points_label)
                                 "Reward: {}".format (env.V[env.ROUND], round(env.balance), round(env.reward)))
             for action_slider in action_sliders: action_slider.reset ()
 
-        if env.valid_turn:
-            update_obs_table (obs_table, list(env.V))
-
+        update_obs_table (obs_table, list(env.V) + [info['balance'], reward])
         update_points_label (points_label, env, action_sliders)
 
 
@@ -148,7 +155,7 @@ def reset (step_button, env, action_sliders, obs_table, obs_status, points_label
                         "Reward: 0")
 
     obs_table.setColumnCount (0)
-    update_obs_table (obs_table, list(env.V))
+    update_obs_table (obs_table, list(env.V) + [0, 0])
 
     update_points_label (points_label, env, action_sliders)
 
@@ -185,7 +192,12 @@ def main ():
         "Vermehrungsrate",
         "Umweltbelastung",
         "Bevoelkerung",
-        "Politik"
+        "Politik",
+
+        "Runde",
+        "Aktionspunkte",
+        "Bilanz",
+        "Reward",
     ]
     
     # Set sliders and buttons
@@ -258,9 +270,9 @@ def main ():
     for i in range (len (table_headers)):
         row_header = QTableWidgetItem (table_headers[i])
         obs_table.setVerticalHeaderItem (i, row_header)
-        if i == len (table_headers) - 1 or i == len (table_headers) - 2 or i == len (table_headers) - 3:
+        # if i == len (table_headers) - 1 or i == len (table_headers) - 2 or i == len (table_headers) - 3:
+        if i > 7:
             row_header.setFont(column_font)
-            
         
 
     # Set status
@@ -294,4 +306,3 @@ def main ():
 
 if __name__ == '__main__':
     main ()
- 
