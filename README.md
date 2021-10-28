@@ -79,7 +79,7 @@ Following instructions include the **PPO** algorithm as example.
 #  - utils.wrappers.OekoSimpleActionWrapper
 #  - utils.wrappers.OekoSimpleObsWrapper
 #  - utils.wrappers.OekoRewardWrapper
-  n_envs: 4
+  n_envs: 8
   n_timesteps: !!float 1e5
   policy: 'MlpPolicy'
   n_steps: 32
@@ -111,7 +111,7 @@ Optionally create a folder to store each trained agent. A further folder named a
 ```
 ├── oekolopoly_agents
 │   └── ppo
-│       ├── Oekolopoly-v0_1
+│       ├── Oekolopoly-v0_10
 │       └── ...
 └── logs
     └── benchmark
@@ -134,7 +134,7 @@ python train.py --algo ppo --env Oekolopoly-v0 -f oekolopoly_agents --tensorboar
 ### Train a certain agent more:
 
 ```shell
-python train.py --algo ppo --env Oekolopoly-v0 -i oekolopoly_agents/ppo/Oekolopoly-v0_1/Oekolopoly-v0.zip
+python train.py --algo ppo --env Oekolopoly-v0 -i oekolopoly_agents/ppo/Oekolopoly-v0_10/Oekolopoly-v0.zip
 ```
 * `-i`: path to the particular agent
 
