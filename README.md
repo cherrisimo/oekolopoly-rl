@@ -73,9 +73,14 @@ Following instructions include the **PPO** algorithm as example.
 2. Configure hyperparameters in `rl-baselines3-zoo/hyperparams/ppo.yml` as shown below:
 
 ```python
-OekolopolyBox-v0:
-  n_envs: 8
-  n_timesteps: 4000
+  Oekolopoly-v0:
+  env_wrapper:
+  - utils.wrappers.OekoBoxActionWrapper
+#  - utils.wrappers.OekoSimpleActionWrapper
+#  - utils.wrappers.OekoSimpleObsWrapper
+#  - utils.wrappers.OekoRewardWrapper
+  n_envs: 4
+  n_timesteps: !!float 1e5
   policy: 'MlpPolicy'
   n_steps: 32
   batch_size: 256
@@ -86,15 +91,8 @@ OekolopolyBox-v0:
   learning_rate: lin_0.001
   clip_range: lin_0.2
 ```
- 2a. Add a wrapper to environment: 
-```python
-env_wrapper:
-  - utils.wrappers.OekoBoxWrapper
-#  - utils.wrappers.OekoEnvSimpleWrapper
-#  - utils.wrappers.OekoSimpleObsWrapper
-#  - utils.wrappers.OekoRewardWrapper
-```
-Here the Box Wrapper is used as example. Adding each wrapper as argument in the hyperparamter list does not require registering it as new environment. All wrappers are to be found under `utils/wrappers.py`. The implementation of each wrapper can be found in [wrappers.py](https://github.com/cherrisimo/oekolopoly-rl/blob/main/wrappers/wrappers.py) in this repository. 
+
+Adding each wrapper as argument in the hyperparamter list does not require registering it as new environment. All wrappers are to be found under `utils/wrappers.py`. The implementation of each wrapper can be found in [wrappers.py](https://github.com/cherrisimo/oekolopoly-rl/blob/main/wrappers/wrappers.py) in this repository. 
     
 3. If custom environment is not yet installed, now it can be done:
 
@@ -126,7 +124,7 @@ If not done, `logs` stores the newly trained agents per default.
 ### Train an agent:
 
 ```shell
-python train.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents --tensorboard-log tensorboard-log
+python train.py --algo ppo --env Oekolopoly-v0 -f oekolopoly_agents --tensorboard-log tensorboard-log
 ```
 * `--algo`: specifies the algorithm to be executed
 * `--env`: name of environment
@@ -136,14 +134,14 @@ python train.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents --tensorb
 ### Train a certain agent more:
 
 ```shell
-python train.py --algo ppo --env OekolopolyBox-v0 -i oekolopoly_agents/ppo/OekolopolyBox-v0_1/OekolopolyBox-v0.zip
+python train.py --algo ppo --env Oekolopoly-v0 -i oekolopoly_agents/ppo/Oekolopoly-v0_1/Oekolopoly-v0.zip
 ```
 * `-i`: path to the particular agent
 
 ### See trained agent in action:
 
 ```shell
-python enjoy.py --algo ppo --env OekolopolyBox-v0 -f oekolopoly_agents --exp-id 9
+python enjoy.py --algo ppo --env Oekolopoly-v0 -f oekolopoly_agents --exp-id 9
 ```
 * `--exp-id 9`: enjoy a particular agent. If not defined, the last trained agent is called per default, therefore it's an optional paramater.
 * `-f`: assigning the folder is optional
