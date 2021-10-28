@@ -179,7 +179,7 @@ Following command leads to a localhost webpage where performance of different ag
 tensorboard --logdir tensorboard-log
 ```
 
-## Overview of commands and folders:
+## Overview of commands and folders
 
 Following table lists folders which are accessed per default by the respective command and which file is being invoked/altered as a result.
 
@@ -188,6 +188,10 @@ Command      | Default Folder    | Path to File/Implementation
 train        | logs              | rl-baselines3-zoo/train.py
 enjoy        | rl-trained-agents | rl-baselines3-zoo/enjoy.py
 benchmark    | rl-trained-agents | rl-baselines3-zoo/benchmark.md or logs/benchmark/benchmark.md
+
+## Manual evaluation of agents
+
+The contents of folder [eval](https://github.com/cherrisimo/oekolopoly-rl/blob/main/eval) must be copied to the the `rl-baselines3-zoo` directory. In the command prompt navigate to the `rl-baselines3-zoo` directory and start the evaluation program using `python play.py`.  
 
 
 ## Optional requirements
