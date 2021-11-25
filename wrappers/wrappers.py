@@ -1,4 +1,3 @@
-from math import floor
 import gym
 import numpy as np
 from sb3_contrib.common.wrappers import TimeFeatureWrapper  # noqa: F401 (backward compatibility)
@@ -6,8 +5,9 @@ from scipy.signal import iirfilter, sosfilt, zpk2sos
 
 import math
 
-class OekoBoxWrapper(gym.ActionWrapper):
-    def distribute1 (action, points):
+
+class OekoBoxActionWrapper(gym.ActionWrapper):
+    def distribute1 (self, action, points):
         action = list (action)
         action_sum = sum (action)
 
@@ -30,8 +30,6 @@ class OekoBoxWrapper(gym.ActionWrapper):
 
 
     def __init__ (self, env):
-        print ("BOX WRAPPER INIT")
-
         super().__init__(env)
         self.action_min = np.float32 (np.array ([0, -1,  0,  0,  0, -1]))
         self.action_max = np.float32 (np.array ([1,  1,  1,  1,  1,  1]))
@@ -50,7 +48,7 @@ class OekoBoxWrapper(gym.ActionWrapper):
 
         regions_act = act[0:5]
         special_act = round (act[5] * 5)
-        regions_act = OekoBoxWrapper.distribute1 (regions_act, self.V[self.POINTS])
+        regions_act = self.distribute1 (regions_act, self.V[self.POINTS])
         if reduce_production: regions_act[1] = -regions_act[1]
 
         for i in range (len (regions_act)):
@@ -63,7 +61,7 @@ class OekoBoxWrapper(gym.ActionWrapper):
         return act
 
 
-class OekoEnvSimpleWrapper(gym.ActionWrapper):
+class OekoSimpleActionWrapper(gym.ActionWrapper):
     ACTIONS = [
         '000000',
         '000010',
@@ -179,12 +177,12 @@ class OekoSimpleObsWrapper(gym.ObservationWrapper):
         self.obs_split = 3  # 3=low/mid/high
 
         self.original_observation_space = self.observation_space
-        self.observation_space = gym.spaces.MultiDiscrete ([3] * obs_count)  # 6561
+        self.observation_space = gym.spaces.MultiDiscrete ([3] * self.obs_count)  # 6561
 
 
     def observation (self, obs):
-        new_obs = [0] * obs_count
-        for i in range(obs_count):
+        new_obs = [0] * self.obs_count
+        for i in range(self.obs_count):
             new_obs[i] = math.floor (obs[i] / self.original_observation_space.nvec[i] * self.obs_split)
 
         return new_obs
@@ -200,7 +198,6 @@ class OekoRewardWrapper(gym.RewardWrapper):
         rew = production_reward + bevoelkerung_reward
 
         return rew
-
 
 class DoneOnSuccessWrapper(gym.Wrapper):
     """
