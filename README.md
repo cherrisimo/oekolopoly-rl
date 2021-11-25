@@ -134,8 +134,7 @@ Optionally, create a folder to store each trained agent. A further folder named 
 ```
 If not done, `logs` stores the newly trained agents per default.
 
------ Following commands should always be executed while being in the repo folder `rl-baselines3-zoo`. -----
-<span style="background-color: #c6e2ff">Marked text</span>
+<mark style="background-color: lightblue">Following commands should always be executed while being in the repo folder `rl-baselines3-zoo`.</mark>
 ### Train an agent:
 
 ```shell
