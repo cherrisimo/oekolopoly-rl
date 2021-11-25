@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-import sys
+import sys, os
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon, QFont                                    
 from PyQt5.QtWidgets import QApplication, QFileDialog, QHBoxLayout, QVBoxLayout, QFormLayout, QWidget, QSpinBox, QPushButton, QTableWidget, QTableWidgetItem, QPushButton, QLabel
@@ -59,39 +59,38 @@ def open_model (model, predict_button, play_button, clear_button):
         print (filenames)
         print (model_path)
 
+        model_dirpath  = os.path.dirname  (model_path)
+        model_filename = os.path.basename (model_path)
+        if not model_filename.endswith ('.zip'): return
+        env_name = model_filename[:-4]
+        print (env_name)
 
-        if model_path.endswith ('/Oekolopoly-v0.zip'):
-            model_path_dir = model_path[:-18]
+        config_path = f'{model_dirpath}/{env_name}/config.yml'
+        config_file = open (config_path)
+        assert config_file
+        config_lines = config_file.readlines ()
+        config_file.close ()
 
-            config_path = f'{model_path_dir}/Oekolopoly-v0/config.yml'
-            config_file = open (config_path)
-            assert config_file
-            config_lines = config_file.readlines ()
-            config_file.close ()
+        import gym
+        model['env'] = gym.make (f'oekolopoly:{env_name}')
 
-            import gym
-            model['env'] = gym.make ('oekolopoly:Oekolopoly-v0')
-
-            for config_line in config_lines:
-                if   config_line.endswith ('- utils.wrappers.OekoBoxActionWrapper\n'):
-                    from utils.wrappers import OekoBoxActionWrapper
-                    print ("wrapper: OekoBoxActionWrapper")
-                    model['env'] = OekoBoxActionWrapper (model['env'])
-                elif config_line.endswith ('- utils.wrappers.OekoSimpleActionWrapper\n'):
-                    from utils.wrappers import OekoSimpleActionWrapper
-                    print ("wrapper: OekoSimpleActionWrapper")
-                    model['env'] = OekoSimpleActionWrapper (model['env'])
-                elif config_line.endswith ('- utils.wrappers.OekoSimpleObsWrapper\n'):
-                    from utils.wrappers import OekoSimpleObsWrapper
-                    print ("wrapper: OekoSimpleObsWrapper")
-                    model['env'] = OekoSimpleObsWrapper (model['env'])
-                elif config_line.endswith ('- utils.wrappers.OekoRewardWrapper\n'):
-                    from utils.wrappers import OekoRewardWrapper
-                    print ("wrapper: OekoRewardWrapper")
-                    model['env'] = OekoRewardWrapper (model['env'])
-        else:
-            model['env'] = None
-            return
+        for config_line in config_lines:
+            if   config_line.endswith ('- utils.wrappers.OekoBoxActionWrapper\n'):
+                from utils.wrappers import OekoBoxActionWrapper
+                print ("wrapper: OekoBoxActionWrapper")
+                model['env'] = OekoBoxActionWrapper (model['env'])
+            elif config_line.endswith ('- utils.wrappers.OekoSimpleActionWrapper\n'):
+                from utils.wrappers import OekoSimpleActionWrapper
+                print ("wrapper: OekoSimpleActionWrapper")
+                model['env'] = OekoSimpleActionWrapper (model['env'])
+            elif config_line.endswith ('- utils.wrappers.OekoSimpleObsWrapper\n'):
+                from utils.wrappers import OekoSimpleObsWrapper
+                print ("wrapper: OekoSimpleObsWrapper")
+                model['env'] = OekoSimpleObsWrapper (model['env'])
+            elif config_line.endswith ('- utils.wrappers.OekoRewardWrapper\n'):
+                from utils.wrappers import OekoRewardWrapper
+                print ("wrapper: OekoRewardWrapper")
+                model['env'] = OekoRewardWrapper (model['env'])
 
         try:
             if model_path.find ('/ppo/') != -1:
