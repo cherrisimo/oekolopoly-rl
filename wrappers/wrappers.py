@@ -4,9 +4,7 @@ import numpy as np
 from sb3_contrib.common.wrappers import TimeFeatureWrapper  # noqa: F401 (backward compatibility)
 from scipy.signal import iirfilter, sosfilt, zpk2sos
 
-
 import math
-
 
 class OekoBoxWrapper(gym.ActionWrapper):
     def distribute1 (action, points):
@@ -181,7 +179,6 @@ class OekoSimpleObsWrapper(gym.ObservationWrapper):
         self.obs_split = 3  # 3=low/mid/high
 
         self.original_observation_space = self.observation_space
-        # self.observation_space = gym.spaces.MultiDiscrete ([3**obs_count])  # 6561
         self.observation_space = gym.spaces.MultiDiscrete ([3] * obs_count)  # 6561
 
 
@@ -189,13 +186,6 @@ class OekoSimpleObsWrapper(gym.ObservationWrapper):
         new_obs = [0] * obs_count
         for i in range(obs_count):
             new_obs[i] = math.floor (obs[i] / self.original_observation_space.nvec[i] * self.obs_split)
-
-        # string = ''
-        # for i in range(8):
-        #     string += str (new_obs[i])
-        # state = int (string, base=3)
-        #
-        # return state
 
         return new_obs
 
@@ -208,9 +198,6 @@ class OekoRewardWrapper(gym.RewardWrapper):
         production_reward   = 14 - abs (15 - self.V[self.PRODUKTION])
         bevoelkerung_reward = 23 - abs (24 - self.V[self.BEVOELKERUNG])
         rew = production_reward + bevoelkerung_reward
-
-        # if self.V[self.ROUND] >= 10:
-        #     rew = round (float(self.a / self.b), 2)
 
         return rew
 
