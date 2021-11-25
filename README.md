@@ -65,6 +65,8 @@ git clone --recursive https://github.com/DLR-RM/rl-baselines3-zoo
 
 ```shell
 cd rl-baselines3-zoo
+```
+```shell
 pip install -r requirements.txt
 ```
 
