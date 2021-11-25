@@ -80,11 +80,13 @@ try:
 except ImportError:
     oekolopoly = None
 ```
-
-2. Configure hyperparameters in `rl-baselines3-zoo/hyperparams/ppo.yml` for the **PPO** algorithm as shown below:
+2. All wrappers are to be found under `utils/wrappers.py`. The implementation of each wrapper can be found in [wrappers.py](https://github.com/cherrisimo/oekolopoly-rl/blob/main/wrappers/wrappers.py) in this repository. 
+To use the wrappers implemented exclusively for the Oekolopoly environment either replace the original `utils/wrappers.py` with the [wrappers.py](https://github.com/cherrisimo/oekolopoly-rl/blob/main/wrappers/wrappers.py) provided in this repository or copy and paste the section with the wished wrappers into the original file.
+    
+3. Configure hyperparameters in `rl-baselines3-zoo/hyperparams/ppo.yml` for the **PPO** algorithm as shown below:
 
 ```python
-  Oekolopoly-v0:
+Oekolopoly-v0:
   env_wrapper:
   - utils.wrappers.OekoBoxActionWrapper
 #  - utils.wrappers.OekoSimpleActionWrapper
@@ -102,11 +104,17 @@ except ImportError:
   learning_rate: lin_0.001
   clip_range: lin_0.2
 ```
-The aforementioned hyperparameters are tuned and have been sampled from the CartPole-v1 environment.
+The aforementioned hyperparameters are tuned and have been sampled from the CartPole-v1 environment. Adding each wrapper as argument in the hyperparamter list does not require registering it as new environment. Alternatively, change name of environment to OekolopolyRew2-v0 or OekolopolyRew3-v0 or OekolopolyRew4-v0, to use different reward system.
 
-Adding each wrapper as argument in the hyperparamter list does not require registering it as new environment. All wrappers are to be found under `utils/wrappers.py`. The implementation of each wrapper can be found in [wrappers.py](https://github.com/cherrisimo/oekolopoly-rl/blob/main/wrappers/wrappers.py) in this repository. 
-    
-3. If custom environment is not yet installed, now it can be done. Go to the respective folder of the environment where `setup.py` is visible and execute the command:
+#### Rewards overview:
+Environment name      | Type of Reward    
+--------------------- | -------------
+Oekolopoly-v0         | <img src="https://latex.codecogs.com/gif.latex?B=\frac{10(P&plus;3d)}{(r&plus;3)}" title="B=\frac{10(P+3d)}{(r+3)}" />               
+OekolopolyRew2-v0     | The agent gets the simple reward 1 for each round.  
+OekolopolyRew3-v0     | The agent gets an auxiliary reward for each turn, in order to keep Production and Population in the middle.
+OekolopolyRew4-v0     | The agent gets the sum of the auxiliary reward and balance number at the end of each round.
+
+4. If custom environment is not yet installed, now it can be done. Go to the respective folder of the environment where `setup.py` is visible and execute the command:
 
 ```shell
 pip install -e .
@@ -127,6 +135,7 @@ Optionally, create a folder to store each trained agent. A further folder named 
 If not done, `logs` stores the newly trained agents per default.
 
 ----- Following commands should always be executed while being in the repo folder `rl-baselines3-zoo`. -----
+<span style="background-color: #c6e2ff">Marked text</span>
 ### Train an agent:
 
 ```shell
