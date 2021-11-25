@@ -13,7 +13,7 @@ A repository aimed at performing different RL-Algorithms on the custom environme
  
 ## Installing
 
-[!IMPORTANT] **Python 3.8** is the required version of python because of the module [pytype](https://github.com/cherrisimo/pytype). Also please use the [environment](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly) provided in **this repository** as it is the most fresh version of the game Oekolopoly.
+Note: **Python 3.8** is the required for this project because of the module [pytype](https://github.com/cherrisimo/pytype). Also please use the [environment](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly) provided in **this repository** as it is the latest code version of the game Oekolopoly.
 
 ### Let's get started: 
 1. Create a new environment with **tensorflow** and the required Python version installed as followed:
@@ -32,26 +32,36 @@ conda install -c anaconda tensorflow
 
 ```shell
 conda activate env_name
+```
+```shell
 conda install -c conda-forge pytype
+```
+```shell
 conda install -c conda-forge pybullet
+```
+```shell
 conda install -c conda-forge box2d-py
 ```
+3. Install pyglet for rendering functions in the environment:
 
-3. Install git:
+```shell
+pip install pyglet
+```
+4. Install git:
 ```shell
 conda install git
 ```
 
-RL-Baselines3-Zoo contains further repositories. In one of them reside the over 100+ trained agents. The argument `--recursive` is used to clone them as well.
+RL-Baselines3-Zoo contains further repositories, where over 100 pretrained agents reside. The argument `--recursive` is used to clone them as well. They can be found in folder `rl-trained-agents` in the directory of the cloned repository `rl-baselines3-zoo`.
 
-[!NOTE] As of now not sure how to clone the baselines repository with its sub-repos using GitHub Desktop and not aware if there would be any repercussions when the sub-repos are missing. 
+Note: As of now not sure how to clone the baselines repository with its sub-repos using GitHub Desktop and not aware if there would be any repercussions when the sub-repos are missing. 
 
-4. Clone respective repository with its sub-repos:
+5. Clone respective repository with its sub-repos:
 ```shell
 git clone --recursive https://github.com/DLR-RM/rl-baselines3-zoo
 ```
 
-5. In the repository folder execute following command:
+6. In the repository folder execute following command:
 
 ```shell
 cd rl-baselines3-zoo
@@ -60,7 +70,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-1. Add custom environment to `utils/import_envs.py` using:
+1. Add custom environment to `utils/import_envs.py` by pasting the following lines:
 
 ```python
 try:
@@ -68,9 +78,8 @@ try:
 except ImportError:
     oekolopoly = None
 ```
-Following instructions include the **PPO** algorithm as example.
 
-2. Configure hyperparameters in `rl-baselines3-zoo/hyperparams/ppo.yml` as shown below:
+2. Configure hyperparameters in `rl-baselines3-zoo/hyperparams/ppo.yml` for the **PPO** algorithm as shown below:
 
 ```python
   Oekolopoly-v0:
@@ -91,22 +100,17 @@ Following instructions include the **PPO** algorithm as example.
   learning_rate: lin_0.001
   clip_range: lin_0.2
 ```
+The aforementioned hyperparameters are tuned and have been sampled from the CartPole-v1 environment.
 
 Adding each wrapper as argument in the hyperparamter list does not require registering it as new environment. All wrappers are to be found under `utils/wrappers.py`. The implementation of each wrapper can be found in [wrappers.py](https://github.com/cherrisimo/oekolopoly-rl/blob/main/wrappers/wrappers.py) in this repository. 
     
-3. If custom environment is not yet installed, now it can be done:
+3. If custom environment is not yet installed, now it can be done. Go to the respective folder of the environment where `setup.py` is visible and execute the command:
 
 ```shell
 pip install -e .
 ```
 
-4. Install pyglet for rendering functions in the environment:
-
-```shell
-pip install pyglet
-```
-
-Optionally create a folder to store each trained agent. A further folder named after the used algorithm for the trained agent should reside in it as shown below:
+Optionally, create a folder to store each trained agent. A further folder named after the used algorithm for the trained agent should reside in it as shown below:
 
 ```
 ├── oekolopoly_agents
@@ -120,7 +124,7 @@ Optionally create a folder to store each trained agent. A further folder named a
 ```
 If not done, `logs` stores the newly trained agents per default.
 
-[!IMPORTANT] Following commands should always be executed while being in the repo folder `rl-baselines3-zoo`:
+----- Following commands should always be executed while being in the repo folder `rl-baselines3-zoo`. -----
 ### Train an agent:
 
 ```shell
@@ -167,9 +171,9 @@ Generate benchmark for all agents used on own custom environment:
 python -m utils.benchmark --log-dir oekolopoly_agents
 ```
 
-[!NOTE] Oftentimes the generating of the benchmark fails and the loading of the table in the command prompt "freezes". A solution for now is moving own agents to the `rl-trained-agents` directory and deleting the rest in order to see only chosen agents in comparison.
+Note: Oftentimes the generating of the benchmark fails and the loading of the table in the command prompt "freezes". A solution for now is moving own agents to the `rl-trained-agents` directory and deleting the rest in order to see only chosen agents in comparison.
 
-[!NOTE] Generating benchmark for own agents from the `logs` directory is not possible because it clashes with the `benchmark` folder there - either loading "freezes" or it starts generating a benchmark for *ALL* trained agents which takes all too long. 
+Note: Generating benchmark for own agents from the `logs` directory is not possible because it clashes with the `benchmark` folder there - either loading "freezes" or it starts generating a benchmark for *ALL* trained agents which takes all too long. 
 
 ### Tensorboard
 
@@ -191,10 +195,15 @@ benchmark    | rl-trained-agents | rl-baselines3-zoo/benchmark.md or logs/benchm
 
 ## Manual evaluation of agents
 
-The contents of folder [eval](https://github.com/cherrisimo/oekolopoly-rl/blob/main/eval) must be copied to the the `rl-baselines3-zoo` directory. In the command prompt navigate to the `rl-baselines3-zoo` directory and start the evaluation program using
+The contents of folder [eval](https://github.com/cherrisimo/oekolopoly-rl/blob/main/eval) must be copied to the the `rl-baselines3-zoo` directory. The UI is programmed in PyQt5 and requires its installation:
+```shell
+pip install PyQt5
+```
+In the command prompt navigate to the `rl-baselines3-zoo` directory and start the evaluation program using:
 ```shell
 python play.py
 ```
+Choose an agent by selecting a valid .zip-Folder following the path: `oekolopoly_agents/ppo/Oekolopoly-v0_10/Oekolopoly-v0.zip`. It contains necessary informations about the agent. The video material showcases a quick guidance on further usage of the UI.
 
 ## Optional requirements
 
@@ -215,7 +224,7 @@ This section is relevant in case there are further errors and therefore RL-Basel
    ## TO DO
    -  [x] Develop further Wrapper to split the observation space in low-medium-high
    -  [x] Develop another Wrapper to split action in three sectors which are to be distributed among the 5 Life Areas
-   -  [ ] Test and compare original and help reward on PPO, A2C, DDPG, TD3, SAC with wrappers
+   -  [x] Test and compare different rewards on PPO, A2C, DDPG, TD3, SAC with wrappers
    
    ## Resources
    * [Stable Baselines3](https://stable-baselines3.readthedocs.io/en/master/guide/rl_zoo.html)
