@@ -38,14 +38,16 @@ conda activate env_name
 ```shell
 conda install -c conda-forge pytype pybullet box2d-py
 ```
-3. Install pyglet for rendering functions in the environment:
+
+3. Install git:
+```shell
+conda install git
+```
+
+4. Install pyglet for rendering functions in the environment:
 
 ```shell
 pip install pyglet
-```
-4. Install git:
-```shell
-conda install git
 ```
 
 RL-Baselines3-Zoo contains further repositories, where over 100 pretrained agents reside. The argument `--recursive` is used to clone them as well. They can be found in folder `rl-trained-agents` in the directory of the cloned repository `rl-baselines3-zoo`.
