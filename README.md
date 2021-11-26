@@ -222,7 +222,7 @@ python play.py
 ```
 Choose an agent by selecting a valid .zip-Folder following the path: `oekolopoly_agents/ppo/Oekolopoly-v0_10/Oekolopoly-v0.zip`. It contains necessary informations about the agent. The video material showcases a quick guidance on further usage of the UI.
 
-## Optional requirements
+## Optional steps
 
 This section is relevant in case there are further errors and therefore RL-Baselines3-Zoo could not be installed properly.
 
