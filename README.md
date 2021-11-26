@@ -47,7 +47,7 @@ conda install git
 4. Install pyglet for rendering functions in the environment:
 
 ```shell
-pip install pyglet
+pip install pyglet PyQt5
 ```
 
 RL-Baselines3-Zoo contains further repositories, where over 100 pretrained agents reside. The argument `--recursive` is used to clone them as well. They can be found in folder `rl-trained-agents` in the directory of the cloned repository `rl-baselines3-zoo`.
@@ -58,13 +58,21 @@ Note: As of now not sure how to clone the baselines repository with its sub-repo
 ```shell
 git clone --recursive https://github.com/DLR-RM/rl-baselines3-zoo
 ```
+
+To work with the agents provided [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) an older version of RL-Baselines3-Zoo is required, which can be accessed by:
+
+```shell
+cd rl-baselines3-zoo
 git checkout 9dc3bd381e454716bd860d32d7bc78c56fd8f3c3
+```
 
 6. In the repository folder execute following command:
 
 ```shell
 cd rl-baselines3-zoo
 ```
+
+Change stable-baselines3[extra,tests,docs]==1.1.0a11
 ```shell
 pip install -r requirements.txt
 ```
