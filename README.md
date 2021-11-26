@@ -245,3 +245,4 @@ This section is relevant in case there are further errors and therefore RL-Basel
    
    ## Resources
    * [Stable Baselines3](https://stable-baselines3.readthedocs.io/en/master/guide/rl_zoo.html)
+   * [RL-Baselines3-Zoo](https://github.com/DLR-RM/rl-baselines3-zoo)
