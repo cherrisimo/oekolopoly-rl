@@ -66,17 +66,17 @@ cd rl-baselines3-zoo
 git checkout 9dc3bd381e454716bd860d32d7bc78c56fd8f3c3
 ```
 
-6. In the repository folder execute following command:
+Change stable-baselines3[extra,tests,docs]==1.1.0a11
+
+--------------------------------------------------------------------------
+6. In the repository folder execute following to install required packages:
 
 ```shell
 cd rl-baselines3-zoo
 ```
-
-Change stable-baselines3[extra,tests,docs]==1.1.0a11
 ```shell
 pip install -r requirements.txt
 ```
---------------------------------------------------------------------------
 ## Usage
 
 1. Add custom environment to `utils/import_envs.py` by pasting the following lines:
