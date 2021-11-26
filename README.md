@@ -58,7 +58,7 @@ Note: As of now not sure how to clone the baselines repository with its sub-repo
 ```shell
 git clone --recursive https://github.com/DLR-RM/rl-baselines3-zoo
 ```
-
+---------------------------------------------------------------------------
 To work with the agents provided [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) an older version of RL-Baselines3-Zoo is required, which can be accessed by:
 
 ```shell
@@ -76,7 +76,7 @@ Change stable-baselines3[extra,tests,docs]==1.1.0a11
 ```shell
 pip install -r requirements.txt
 ```
-
+--------------------------------------------------------------------------
 ## Usage
 
 1. Add custom environment to `utils/import_envs.py` by pasting the following lines:
