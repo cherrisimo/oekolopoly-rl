@@ -36,13 +36,7 @@ conda install -c anaconda tensorflow
 conda activate env_name
 ```
 ```shell
-conda install -c conda-forge pytype
-```
-```shell
-conda install -c conda-forge pybullet
-```
-```shell
-conda install -c conda-forge box2d-py
+conda install -c conda-forge pytype pybullet box2d-py
 ```
 3. Install pyglet for rendering functions in the environment:
 
@@ -62,6 +56,7 @@ Note: As of now not sure how to clone the baselines repository with its sub-repo
 ```shell
 git clone --recursive https://github.com/DLR-RM/rl-baselines3-zoo
 ```
+git checkout 9dc3bd381e454716bd860d32d7bc78c56fd8f3c3
 
 6. In the repository folder execute following command:
 
