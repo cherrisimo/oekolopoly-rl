@@ -90,7 +90,6 @@ Oekolopoly-v0:
   - utils.wrappers.OekoBoxActionWrapper
 #  - utils.wrappers.OekoSimpleActionWrapper
 #  - utils.wrappers.OekoSimpleObsWrapper
-#  - utils.wrappers.OekoRewardWrapper
   n_envs: 8
   n_timesteps: !!float 1e5
   policy: 'MlpPolicy'
@@ -103,7 +102,7 @@ Oekolopoly-v0:
   learning_rate: lin_0.001
   clip_range: lin_0.2
 ```
-The aforementioned hyperparameters are tuned and have been sampled from the CartPole-v1 environment. Adding each wrapper as argument in the hyperparamter list does not require registering it as new environment. Alternatively, change name of environment to OekolopolyRew2-v0 or OekolopolyRew3-v0 or OekolopolyRew4-v0, to use different reward system.
+The aforementioned hyperparameters are tuned and have been sampled from the CartPole-v1 environment. Sccording to them the agent must train for 100 000 timesteps. Adding each wrapper as argument in the hyperparamter list does not require registering it as new environment. Alternatively, change name of environment to OekolopolyRew2-v0 or OekolopolyRew3-v0 or OekolopolyRew4-v0, to use different reward system. Issue with Reward-Wrapper described [here](https://github.com/DLR-RM/stable-baselines3/issues/181).
 
 #### Rewards overview:
 Environment name      | Type of Reward    
@@ -137,12 +136,15 @@ If not done, `logs` stores the newly trained agents per default.
 ### Train an agent:
 
 ```shell
-python train.py --algo ppo --env Oekolopoly-v0 -f oekolopoly_agents --tensorboard-log tensorboard-log
+python train.py --algo ppo --env Oekolopoly-v0 -f oekolopoly_agents -n 5000 --tensorboard-log tensorboard-log
 ```
 * `--algo`: specifies the algorithm to be executed
 * `--env`: name of environment
 * `-f`: save agent to desired folder. If not defined, `logs` is used as the default path, therefore it's an optional paramater.
+* `-n`: set number of timesteps. Optional parameter.
 * `--tensorboard-log tensorboard-log`: save data about training to later generate a graph. [See this section.](https://github.com/cherrisimo/oekolopoly-rl#generate-graphs)
+
+Note: Stopping the training sooner than it has reached its given timesteps can be done using CTRL + c but then the informations about the agent (the .zip-File used for the evaluation programm here) may not be saved properly. Best practice is to set the wished number of timesteps in the hyperparameters file or using the `-n` parameter.
 
 ### Train a certain agent more:
 
