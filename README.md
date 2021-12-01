@@ -218,7 +218,14 @@ The contents of folder [eval](https://github.com/cherrisimo/oekolopoly-rl/blob/m
 ```shell
 python play.py
 ```
-Choose an agent using **Open Model** by selecting a valid .zip-File following the path: `oekolopoly_agents/ppo/Oekolopoly-v0_10/Oekolopoly-v0.zip`. The .zip contains all the necessary informations about the agent in order to show what his learnt strategy during training is. The button **Play** shows how he plays a full game based on the given observations in left. **Step** makes one game turn based on the given observations left as well. You can delete the contents of the table by clicking **Clear**. The chosen agent remains loaded. To choose a new one simply load another .zip-File of a different agent.
+Choose an agent using **Open Model** by selecting a valid .zip-File following the path: `oekolopoly_agents/ppo/Oekolopoly-v0_10/Oekolopoly-v0.zip`. The .zip contains all the necessary informations about the agent in order to show what his learnt strategy during training is. 
+
+The button **Play** shows how he plays a full game based on the given observations in left. 
+
+**Step** makes one game turn based on the given observations left as well. 
+You can delete the contents of the table by clicking **Clear**. 
+
+The chosen agent remains loaded. To choose a new one simply load another .zip-File of a different agent.
 
 ## Optional steps
 
