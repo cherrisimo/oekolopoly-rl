@@ -91,27 +91,39 @@ def open_model (model, predict_button, play_button, clear_button):
                 from utils.wrappers import OekoRewardWrapper
                 print ("wrapper: OekoRewardWrapper")
                 model['env'] = OekoRewardWrapper (model['env'])
+        
+        newer_python_version = sys.version_info.major == 3 and sys.version_info.minor >= 8
 
+        custom_objects = {}
+        if newer_python_version:
+            custom_objects = {
+               "learning_rate": 0.0,
+               "lr_schedule": lambda _: 0.0,
+               "clip_range": lambda _: 0.0,
+            }
+        
         try:
             if model_path.find ('/ppo/') != -1:
                 from stable_baselines3 import PPO
-                model['agent'] = PPO.load (model_path, model['env'])
+                print(model['env'])
+                print(model_path)
+                model['agent'] = PPO.load (model_path, model['env'], custom_objects=custom_objects)
             elif model_path.find ('/a2c/') != -1:
                 from stable_baselines3 import A2C
-                model['agent'] = A2C.load (model_path, model['env'])
+                model['agent'] = A2C.load (model_path, model['env'], custom_objects=custom_objects)
             elif model_path.find ('/ddpg/') != -1:
                 from stable_baselines3 import DDPG
-                model['agent'] = DDPG.load (model_path, model['env'])
+                model['agent'] = DDPG.load (model_path, model['env'], custom_objects=custom_objects)
             elif model_path.find ('/td3/') != -1:
                 from stable_baselines3 import TD3
-                model['agent'] = TD3.load (model_path, model['env'])
+                model['agent'] = TD3.load (model_path, model['env'], custom_objects=custom_objects)
             elif model_path.find ('/sac/') != -1:
                 from stable_baselines3 import SAC
-                model['agent'] = SAC.load (model_path, model['env'])
+                model['agent'] = SAC.load (model_path, model['env'], custom_objects=custom_objects)
         except Exception as e:
             print (e)
             model['env'] = None
-
+        
         if model['agent'] and model['env']:
             predict_button.setEnabled (True)
             play_button.setEnabled (True)
