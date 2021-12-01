@@ -3,16 +3,21 @@ A repository aimed at performing different RL-Algorithms on the custom environme
 
 ## Repo structure overview
 
-* [oekolopoly](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly) contains the Oekolopoly environment with following differences:
+* [oekolopoly](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly) contains the Oekolopoly environment with following differences to its [original version](https://github.com/cherrisimo/oekolopoly):
   * The observation space no longer contains the flag valid_turn as it brings no information about the state of the environment and is better to be stored in a variable within the step function. 
   * Assertions have been added instead of some if-statements for consistency and better readability.
   * Added reward, which is focused on keeping the Life Areas *Produktion* and *Bevoelkerung* in their middle values.
   * Multiply render functions have been added to showcase each round of the agents' actions.
   * Registered reward environments
-* [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) carries .zip-Files with trained agents grouped by the wrapper and algorithm they've been trained with. To use them extract them from their .zip-Files and paste them in your folder with trained agents `logs` (default) or `oekolopoly_agents` (user defined).
+* [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) carries .zip-Files with trained agents grouped by the wrapper and algorithm they've been trained with.
 * [wrappers.py](https://github.com/cherrisimo/oekolopoly-rl/blob/main/wrappers/wrappers.py) contains implemented wrappers.
-* [eval](https://github.com/cherrisimo/oekolopoly-rl/blob/main/eval) enables user to see a trained agent's strategy a.k.a turns.
- 
+* [eval](https://github.com/cherrisimo/oekolopoly-rl/blob/main/eval) enables user to see a trained agent's game strategy a.k.a turns.
+
+## Motivation
+RL-Baselines3-Zoo provides a nice start base to train own agents in a unified manner. For every agent a segregated directory is automatically created where all its necessary informations are stored - such as training data and used hyperparameters. Furthermore, the results of a trained agent can be plotted using Tensorboard which shows different scalars and metrics for easier analysis on its performance. The framework uses a reliable set of state-of-the-art algorithms which are implemented by [Stable Baselines3](https://stable-baselines3.readthedocs.io/en/master/guide/rl_zoo.html). Other than that the agent's performance can also be visualised if suitable render-Functions are provided. The Framework supports all environments from [OpenAI Gym](https://gym.openai.com/) which means that is is a suitable choice for the Oekolopoly Environment. Most importantly it provides tuned hyperparameters which alleviates the training process because there is no need to tune them. Even then Zoo gives the opportunity to do so with already implemented scripts which use [Optuna](https://optuna.org/).
+
+All aforementioned features are prebuild and require only basis knowledge in RL to be incorporated in one's own project. Because of this the framework is beginner-friendly and a really good start point to create RL-agents.
+
 ## Installing
 
 Note: **Python 3.8** is the required for this project because of the module [pytype](https://github.com/cherrisimo/pytype). Also please use the [environment](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly) provided in **this repository** as it is the latest code version of the game Oekolopoly.
@@ -58,7 +63,10 @@ RL-Baselines3-Zoo contains further repositories, where over 100 pretrained agent
 
 Note: As of now not sure how to clone the baselines repository with its sub-repos using GitHub Desktop and not aware if there would be any repercussions when the sub-repos are missing. 
 
-5. Clone respective repository with its sub-repos:
+5. Clone respective repository with its sub-repos in a new directory:
+```shell
+cd mydir
+```
 ```shell
 git clone --recursive https://github.com/DLR-RM/rl-baselines3-zoo
 ```
@@ -123,7 +131,7 @@ pip install -e .
 To use the environments GUI and play the game yourself navigate to the [oekolopoly-gui](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly/oekolopoly-gui)-Folder using the command prompt and execute:
 
 ```shell
-python oeko-gui.py
+python oeko_gui.py
 ```
 *Regarding training of agents*
 Optionally, create a folder to store each trained agent. A further folder named after the used algorithm for the trained agent should reside in it as shown below:
@@ -162,12 +170,12 @@ python train.py --algo ppo --env Oekolopoly-v0 -i oekolopoly_agents/ppo/Oekolopo
 * `-i`: path to the particular agent
 
 ### See trained agent in action:
-
+To use the agents provided in [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) extract their folders (a.k.a Oekolopoly-v0_...) from their .zip-Files and paste them in a folder with trained agents: `logs` (default) or `oekolopoly_agents` (user defined).
 ```shell
 python enjoy.py --algo ppo --env Oekolopoly-v0 -f oekolopoly_agents --exp-id 9
 ```
 * `--exp-id 9`: enjoy a particular agent. If not defined, the last trained agent is called per default, therefore it's an optional paramater.
-* `-f`: assigning the folder is optional
+* `-f`: assigning the folder is optional. Per default it would use the `logs` folder.
 
 ## Analyse and compare agents
 
@@ -190,7 +198,7 @@ Generate benchmark for all agents used on own custom environment:
 python -m utils.benchmark --log-dir oekolopoly_agents
 ```
 
-Note: Oftentimes the generating of the benchmark fails and the loading of the table in the command prompt "freezes". A solution for now is moving own agents to the `rl-trained-agents` directory and deleting the rest in order to see only chosen agents in comparison.
+Note: Often, the generating of the benchmark fails and the loading of the table in the command prompt "freezes". A solution for now is moving own agents to the `rl-trained-agents` directory and deleting the rest in order to see only chosen agents in comparison.
 
 Note: Generating benchmark for own agents from the `logs` directory is not possible because it clashes with the `benchmark` folder there - either loading "freezes" or it starts generating a benchmark for *ALL* trained agents which takes all too long. 
 
