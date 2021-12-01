@@ -18,6 +18,8 @@ A repository aimed at performing different RL-Algorithms on the custom environme
 Note: **Python 3.8** is the required for this project because of the module [pytype](https://github.com/cherrisimo/pytype). Also please use the [environment](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly) provided in **this repository** as it is the latest code version of the game Oekolopoly.
 
 ### Let's get started: 
+Please use the command prompt for the instrcutions below:
+
 1. Create a new environment with **tensorflow** and the required Python version installed as followed:
 
 ```shell
