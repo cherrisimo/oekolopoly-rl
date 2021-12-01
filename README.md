@@ -9,7 +9,7 @@ A repository aimed at performing different RL-Algorithms on the custom environme
   * Added reward, which is focused on keeping the Life Areas *Produktion* and *Bevoelkerung* in their middle values.
   * Multiply render functions have been added to showcase each round of the agents' actions.
   * Registered reward environments
-* [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) carries .zip-Files with trained agents grouped by the wrapper and algorithm they've been trained with.
+* [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) carries .zip-Files with some well-trained agents grouped by the wrapper and algorithm they've been trained with. 
 * [wrappers.py](https://github.com/cherrisimo/oekolopoly-rl/blob/main/wrappers/wrappers.py) contains implemented wrappers.
 * [eval](https://github.com/cherrisimo/oekolopoly-rl/blob/main/eval) enables user to see a trained agent's game strategy a.k.a turns.
 
