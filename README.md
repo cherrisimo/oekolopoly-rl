@@ -202,15 +202,11 @@ benchmark    | rl-trained-agents | rl-baselines3-zoo/benchmark.md or logs/benchm
 
 ## Manual evaluation of agents
 
-The contents of folder [eval](https://github.com/cherrisimo/oekolopoly-rl/blob/main/eval) must be copied to the the `rl-baselines3-zoo` directory. The UI is programmed in PyQt5 and requires its installation:
-```shell
-pip install PyQt5
-```
-In the command prompt navigate to the `rl-baselines3-zoo` directory and start the evaluation program using:
+The contents of folder [eval](https://github.com/cherrisimo/oekolopoly-rl/blob/main/eval) must be copied to the the `rl-baselines3-zoo` directory. In the command prompt navigate to the `rl-baselines3-zoo` directory and start the evaluation program using:
 ```shell
 python play.py
 ```
-Choose an agent by selecting a valid .zip-Folder following the path: `oekolopoly_agents/ppo/Oekolopoly-v0_10/Oekolopoly-v0.zip`. It contains necessary informations about the agent. The video material showcases a quick guidance on further usage of the UI.
+Choose an agent (Open Model) by selecting a valid .zip-File following the path: `oekolopoly_agents/ppo/Oekolopoly-v0_10/Oekolopoly-v0.zip`. The .zip contains all the necessary informations about the agent in order to show what his learnt strategy during training is. The button Play shows how he plays a full game based on the given observations in left. Step makes one game turn based on the given observations left as well. You can delete the contents of the table by clicking Clear. The chosen agent remains loaded. To choose a new one simply load another .zip-File of a different agent.
 
 ## Optional steps
 
