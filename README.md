@@ -170,7 +170,8 @@ python train.py --algo ppo --env Oekolopoly-v0 -i oekolopoly_agents/ppo/Oekolopo
 * `-i`: path to the particular agent
 
 ### See trained agent in action:
-To use the agents provided in [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) extract their folders (a.k.a Oekolopoly-v0_...) from their .zip-Files and paste them in a folder with trained agents: `logs` (default) or `oekolopoly_agents` (user defined).
+To use the agents provided in [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) extract the contents (a.k.a Oekolopoly-v0_...) of the .zip-Files directly in the folder with trained agents: `logs` (default) or `oekolopoly_agents` (user defined) and with respect to which algorithm they were trained with. For example all agents trained with PPO should reside in the ppo folder.
+
 ```shell
 python enjoy.py --algo ppo --env Oekolopoly-v0 -f oekolopoly_agents --exp-id 9
 ```
