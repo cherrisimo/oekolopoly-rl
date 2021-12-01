@@ -9,7 +9,7 @@ A repository aimed at performing different RL-Algorithms on the custom environme
   * Added reward, which is focused on keeping the Life Areas *Produktion* and *Bevoelkerung* in their middle values.
   * Multiply render functions have been added to showcase each round of the agents' actions.
   * Registered reward environments
-* [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) carries zip folders with trained agents grouped by the wrapper and algorithm they've been trained with.
+* [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) carries .zip-Files with trained agents grouped by the wrapper and algorithm they've been trained with.
 * [wrappers.py](https://github.com/cherrisimo/oekolopoly-rl/blob/main/wrappers/wrappers.py) contains implemented wrappers.
 * [eval](https://github.com/cherrisimo/oekolopoly-rl/blob/main/eval) enables user to see a trained agent's strategy a.k.a turns.
  
@@ -17,8 +17,10 @@ A repository aimed at performing different RL-Algorithms on the custom environme
 
 Note: **Python 3.8** is the required for this project because of the module [pytype](https://github.com/cherrisimo/pytype). Also please use the [environment](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly) provided in **this repository** as it is the latest code version of the game Oekolopoly.
 
+Note: Download the files provided in this repository beforehand to easily copy-paste them to their respective folders once RL-Baselines3-Zoo is installed.
+
 ### Let's get started: 
-Please use the command prompt for the instrcutions below:
+Please use the command prompt for the instructions below:
 
 1. Create a new environment with **tensorflow** and the required Python version installed as followed:
 
@@ -112,12 +114,18 @@ OekolopolyRew2-v0     | The agent gets the simple reward 1 for each round.
 OekolopolyRew3-v0     | The agent gets an auxiliary reward for each turn, in order to keep Production and Population in the middle.
 OekolopolyRew4-v0     | The agent gets the sum of the auxiliary reward and balance number at the end of each round.
 
-4. If custom environment is not yet installed, now it can be done. Go to the respective folder of the environment where `setup.py` is visible and execute the command:
+4. If custom environment is not yet installed, now it can be done. Copy and paste the **folder** [oekolopoly](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly) in `rl-baselines3-zoo` (only a recommendation. Practically it can reside anywhere in PC since it's not dependent on rl-baselines3-zoo). Now navigate to the respective folder of the environment where `setup.py` is visible and execute the command:
 
 ```shell
 pip install -e .
 ```
 
+To use the environments GUI and play the game yourself navigate to the [oekolopoly-gui](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly/oekolopoly-gui)-Folder using the command prompt and execute:
+
+```shell
+python oeko-gui.py
+```
+*Regarding training of agents*
 Optionally, create a folder to store each trained agent. A further folder named after the used algorithm for the trained agent should reside in it as shown below:
 
 ```
