@@ -44,7 +44,7 @@ conda install -c conda-forge pytype pybullet box2d-py
 conda install git
 ```
 
-4. Install pyglet for rendering functions in the environment:
+4. Install pyglet for the rendering functions in the environment and PyQt for the GUIs:
 
 ```shell
 pip install pyglet PyQt5
@@ -58,17 +58,7 @@ Note: As of now not sure how to clone the baselines repository with its sub-repo
 ```shell
 git clone --recursive https://github.com/DLR-RM/rl-baselines3-zoo
 ```
----------------------------------------------------------------------------
-To work with the agents provided [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) an older version of RL-Baselines3-Zoo is required, which can be accessed by:
 
-```shell
-cd rl-baselines3-zoo
-git checkout 9dc3bd381e454716bd860d32d7bc78c56fd8f3c3
-```
-
-Change stable-baselines3[extra,tests,docs]==1.1.0a11
-
---------------------------------------------------------------------------
 6. In the repository folder execute following to install required packages:
 
 ```shell
