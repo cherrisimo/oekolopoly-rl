@@ -102,7 +102,15 @@ class OekoEnv(gym.Env):
             31,   # 8 Runde
             37,   # 9 Aktionspunkte für nächste Runde
         ])
+
+        self.done = False
+        self.done_info = ''
     
+    def close(self):
+        if self.viewer:
+            self.viewer.close ()
+            self.viewer = None 
+            
     def render (self, mode='human'):
         from gym.envs.classic_control import rendering
         import pyglet
@@ -116,6 +124,9 @@ class OekoEnv(gym.Env):
         t      = 0.0
         t_step = 0.1 # speed of animation
         t_end  = 3.0 # pause time -1 after every step
+
+        print ("Action:", self.curr_action)
+        if self.done: print ("Done:", self.done_info)
 
         while t < t_end:
             self.render_rounds (5,  485, min (t, 1.0)) # progress line, shows number of round
@@ -380,12 +391,12 @@ class OekoEnv(gym.Env):
         used_points += action[self.VERMEHRUNGSRATE]
 
         if used_points < 0 or used_points > self.V[self.POINTS]:
-            return self.obs, self.reward, done, {'balance': self.balance, 'done_reason': None, 'reward_points': self.reward_points}
-        assert used_points >= 0 and used_points <= self.V[self.POINTS], f"AssertionError: action takes to many points: action={action} POINTS={self.V[self.POINTS]})"
+            return self.obs, self.reward, done, {'balance': self.balance, 'done_reason': None, 'reward_points': self.reward_points, 'valid_move': False, 'invalid_move_info': "Zu viele Aktionspunkte werden für diese Runde verbraucht."}
+        assert used_points >= 0 and used_points <= self.V[self.POINTS], f"AssertionError: action takes too many points: action={action} POINTS={self.V[self.POINTS]})"
 
         for i in range(5):
             if self.V[i] + action[i] not in range (self.Vmin[i], self.Vmax[i] + 1):
-                return self.obs, self.reward, done, {'balance': self.balance, 'done_reason': None, 'reward_points': self.reward_points}
+                return self.obs, self.reward, done, {'balance': self.balance, 'done_reason': None, 'reward_points': self.reward_points, 'valid_move': False, 'invalid_move_info': f"Zu viele Aktionspunkte werden in {self.V_NAMES[i]} investiert."}
             assert (self.V[i] + action[i]) in range (self.Vmin[i], self.Vmax[i] + 1), f"AssertionError: action puts region out of action[{i}]: action={action} V={self.V}"
 
         # The turn is valid
@@ -442,27 +453,9 @@ class OekoEnv(gym.Env):
         if done:
             self.balance = round (float(self.a / self.b), 2)
 
-            if self.V[self.ROUND] in range(10, 31):
-                self.reward = self.balance
-            else:
-                self.reward = 0
-
-
         # Transform V in obs
         self.obs = self.V - self.Vmin
         assert self.observation_space.contains(self.obs), f"AssertionError: obs not in observation_space: obs={self.obs}"
-
-        # if done_info == None:
-        #    done_info = "Das Spiel setzt fort."
-
-        #if not done: self.reward = 1
-        
-        #if not done: self.reward = self.reward_points
-        
-        # if not done:
-            # production_reward   = 14 - abs (15 - self.V[self.PRODUKTION])
-            # bevoelkerung_reward = 23 - abs (24 - self.V[self.BEVOELKERUNG])
-            # self.reward = production_reward + bevoelkerung_reward
 
         self.reward = self.get_oeko_reward (done) 
 
@@ -473,11 +466,14 @@ class OekoEnv(gym.Env):
         # print("Balance:", self.balance)
         # print("Reward:", self.reward)
 
-        return self.obs, self.reward, done, {'balance': self.balance, 'done_reason': done_info, 'reward_points': self.reward_points}
+        self.done      = done
+        self.done_info = done_info
+
+        return self.obs, self.reward, done, {'balance': self.balance, 'done_reason': done_info, 'reward_points': self.reward_points, 'valid_move': True, 'invalid_move_info': ''}
 
 
     def get_oeko_reward (self, done):
-        if done:
+        if done and self.V[self.ROUND] in range(10, 31):
             return self.balance
         else:
             return 0
