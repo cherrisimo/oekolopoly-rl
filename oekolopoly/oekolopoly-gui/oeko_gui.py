@@ -117,19 +117,7 @@ def step (step_button, env, action_sliders, obs_table, obs_status, points_label)
     current_round = env.V[env.ROUND]
     obs, reward, done, info = env.step (action)
 
-    if not done and current_round == env.V[env.ROUND]:
-        valid_move = False
-    else:
-        valid_move = True
-        
-    # try:
-    #     obs, reward, done, info = env.step (action)
-    #     valid_move = True
-    # except ValueError as e:
-    #     obs_status.setText (str(e))
-    #     valid_move = False
-
-    if valid_move:
+    if info['valid_move']:
         if done:
             step_button.setEnabled (False)
             obs_status.setText ("{}\n"
@@ -144,6 +132,10 @@ def step (step_button, env, action_sliders, obs_table, obs_status, points_label)
 
         update_obs_table (obs_table, list(env.V) + [info['balance'], reward])
         update_points_label (points_label, env, action_sliders)
+    else:
+        obs_status.setText ("{}\n"
+                            "Bilanz: {}\n"
+                            "Reward: {}".format (info['invalid_move_info'], round(env.balance), round(env.reward)))
 
 
 def reset (step_button, env, action_sliders, obs_table, obs_status, points_label):
