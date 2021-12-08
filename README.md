@@ -59,9 +59,7 @@ conda install git
 pip install pyglet PyQt5
 ```
 
-RL-Baselines3-Zoo contains further repositories, where over 100 pretrained agents reside. The argument `--recursive` is used to clone them as well. They can be found in folder `rl-trained-agents` in the directory of the cloned repository `rl-baselines3-zoo`.
-
-Note: As of now not sure how to clone the baselines repository with its sub-repos using GitHub Desktop and not aware if there would be any repercussions when the sub-repos are missing. 
+RL-Baselines3-Zoo contains further repositories, where over 100 pretrained agents reside. The argument `--recursive` is used to clone them as well. It is, however, **optional** and can be left out so that the size of the cloned repository remains at about 350 MB. The pretrained agents can be found in folder `rl-trained-agents` in the directory of the cloned repository `rl-baselines3-zoo` and can take up to 1.5 GB of space.
 
 5. Clone respective repository with its sub-repos in a new directory:
 ```shell
