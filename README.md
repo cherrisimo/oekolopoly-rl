@@ -173,8 +173,9 @@ python train.py --algo ppo --env Oekolopoly-v0 -i oekolopoly_agents/ppo/Oekolopo
 To use the agents provided in [oekolopoly_agents](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly_agents) extract the contents (a.k.a Oekolopoly-v0_...) of the .zip-Files directly in the folder with trained agents: `logs` (default) or `oekolopoly_agents` (user defined) and with respect to which algorithm they were trained with. For example all agents trained with PPO should reside in the ppo folder.
 
 ```shell
-python enjoy.py --algo ppo --env Oekolopoly-v0 -f oekolopoly_agents --exp-id 9
+python enjoy.py --algo ppo --env Oekolopoly-v0 -f oekolopoly_agents --timesteps 22 --exp-id 9
 ```
+* `--timesteps`: the animation runs for the given amount of timesteps and terminates itself automatically.
 * `--exp-id 9`: enjoy a particular agent. If not defined, the last trained agent is called per default, therefore it's an optional paramater.
 * `-f`: assigning the folder is optional. Per default it would use the `logs` folder.
 
