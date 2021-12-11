@@ -110,7 +110,7 @@ Oekolopoly-v0:
   learning_rate: lin_0.001
   clip_range: lin_0.2
 ```
-The aforementioned hyperparameters are tuned and have been sampled from the CartPole-v1 environment. Sccording to them the agent must train for 100 000 timesteps. Adding each wrapper as argument in the hyperparamter list does not require registering it as new environment. Alternatively, change name of environment to OekolopolyRew2-v0 or OekolopolyRew3-v0 or OekolopolyRew4-v0, to use different reward system. Issue with Reward-Wrapper described [here](https://github.com/DLR-RM/stable-baselines3/issues/181).
+The aforementioned hyperparameters are tuned and have been sampled from the CartPole-v1 environment. According to them the agent must train for 1e5 = 100 000 timesteps. Adding each wrapper as argument in the hyperparamter list does not require registering it as new environment. Alternatively, change name of environment to OekolopolyRew2-v0 or OekolopolyRew3-v0 or OekolopolyRew4-v0, to use different reward system. Issue with Reward-Wrapper described [here](https://github.com/DLR-RM/stable-baselines3/issues/181).
 
 #### Rewards overview:
 Environment name      | Type of Reward    
