@@ -11,6 +11,10 @@ for env in env_dict:
          del gym.envs.registration.registry.env_specs[env]
     if 'OekolopolyRew4-v0' in env:
          del gym.envs.registration.registry.env_specs[env]
+    if 'OekolopolyRandom-v0' in env:
+         del gym.envs.registration.registry.env_specs[env]
+    if 'OekolopolyRandomRew2-v0' in env:
+         del gym.envs.registration.registry.env_specs[env]
 
 register(
     id='Oekolopoly-v0',
@@ -27,4 +31,12 @@ register(
 register(
     id='OekolopolyRew4-v0',
     entry_point='oekolopoly.envs:OekoEnvRew4',
+)
+register(
+    id='OekolopolyRandom-v0',
+    entry_point='oekolopoly.envs:OekoEnvRandom',
+)
+register(
+    id='OekolopolyRandomRew2-v0',
+    entry_point='oekolopoly.envs:OekoEnvRandomRew2',
 )
