@@ -234,6 +234,19 @@ python play.py
 
 - You can delete the contents of the table by clicking **Clear**. The chosen agent remains loaded. To choose a new one simply load another .zip-File of a different agent.
 
+## Class overview 
+
+A compact overview of the environments in folder [envs](https://github.com/cherrisimo/oekolopoly-rl/tree/main/oekolopoly/oekolopoly/envs)
+
+Class name         |  Description    
+------------       | -------------     
+OekoEnv            | Original Environment    
+OekoEnvRew2        | Adds reward 1 in each step
+OekoEnvRew3        | Adds auxiliary reward in each step
+OekoEnvRew4        | Adds auxiliary reward + balance in each step
+OekoEnvRandom      | Adds a new initial set of values
+OekoEnvRandomRew2  | Combines reward 1 with new set of values
+
 ## Optional steps
 
 This section is relevant in case there are further errors and therefore RL-Baselines3-Zoo could not be installed properly.
