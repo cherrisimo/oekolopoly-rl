@@ -4,13 +4,6 @@ from gym import spaces
 import numpy as np
 
 
-# Rewards:
-#   OekoEnv:     Returns 0             AND balance on DONE
-#   OekoEnvRew2: Returns 1             AND balance on DONE
-#   OekoEnvRew3: Returns P&B           AND balance on DONE
-#   OekoEnvRew4: Returns P&B + balance AND balance on DONE
-
-
 class OekoEnv(gym.Env):
     
     SANIERUNG       = 0
@@ -60,6 +53,7 @@ class OekoEnv(gym.Env):
     def __init__(self):
         self.viewer       = None
  
+        self.last_v = None                  
         self.init_v = np.array([
             1,  #0 Sanierung
             12, #1 Produktion
@@ -123,7 +117,7 @@ class OekoEnv(gym.Env):
 
         t      = 0.0
         t_step = 0.1 # speed of animation
-        t_end  = 3.0 # pause time -1 after every step
+        t_end  = 3.0 
 
         print ("Action:", self.curr_action)
         if self.done: print ("Done:", self.done_info)
@@ -450,7 +444,7 @@ class OekoEnv(gym.Env):
         self.reward_points = int (self.a)
         self.b = float(self.V[self.ROUND] + 3)
 
-        if done:
+        if done and self.V[self.ROUND] in range(10, 31):
             self.balance = round (float(self.a / self.b), 2)
 
         # Transform V in obs
@@ -466,11 +460,12 @@ class OekoEnv(gym.Env):
         # print("Balance:", self.balance)
         # print("Reward:", self.reward)
 
+        self.last_v    = self.V.copy ()                               
         self.done      = done
         self.done_info = done_info
-
+        
+        #self.reward = 0
         return self.obs, self.reward, done, {'balance': self.balance, 'done_reason': done_info, 'reward_points': self.reward_points, 'valid_move': True, 'invalid_move_info': ''}
-
 
     def get_oeko_reward (self, done):
         if done and self.V[self.ROUND] in range(10, 31):
