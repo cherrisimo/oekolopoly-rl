@@ -34,7 +34,7 @@ def predict (play_whole_game, entries, model, predict_table, status_label):
         predict_table.setColumnCount (predict_table_curr_col + 1)
 
         for act_index in range (len (model['env'].ACT_NAMES)):
-            item = QTableWidgetItem (str (model['env'].prev_action[act_index]))
+            item = QTableWidgetItem (str (model['env'].curr_action[act_index]))
             item.setFlags (Qt.ItemIsSelectable | Qt.ItemIsEnabled)
             predict_table.setItem (act_index, predict_table_curr_col, item)
 
