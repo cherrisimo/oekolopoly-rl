@@ -1,24 +1,20 @@
 # Overview
 
-### OekolopolyBox
-*Klassenname: OekoBoxWrapper, `Action Wrapper`, `Box`*
+### Box Action Wrapper
+*Klassenname: OekoBoxActionWrapper, `Action Wrapper`, `Box`*
 
-Die Aktion wird vom Typ Box erzeugt. Dieser Typ stellt einen kontinuerlichen Raum dar und jedes Wert dieses Aktionsraums kann zwischen -1 und 1 liegen. Die Grenzwerte für jeden Aktionsteil sind in np.arrays gespeichert und an den Konstruktor beim Anlegen des Aktionsraums übergeben. Die Gesamtsumme der Aktion muss 1 nicht überschreiten. Es wird gemäß der vom Agenten gegebenen Aktion überprüft, ob Punkte für Produktion abgezogen werden sollen. Das Ergebnis wird in der Variable `reduce_produktion` gespeichert. Die Funktion `distribute1 ()` korrigiert die Vergabe der Aktionspunkte und somit das Entstehen von illegalen Zügen (z. B. mehr Aktionspunkte verteilen als es verfügbar gibt) wird vermieden. Die `distribute2 ()` Funktion folgt derselben Logik mit dem einzigen Unterschied, dass der Agent angeben kann, welcher Teil der verfügbaren Aktionspunkte er benutzen will und auf diese Weise sparen. `Distribute2 ()` wird jedoch noch nicht beim Experimenten eingesetzt. Die Aktion wird endlich diskretisiert und an die originale Ökolopoly Umgebung übergeben, was vor jedem Aufruf der `step()`-Funktion geschieht. 
+Transforms the action space into a continuous one. Sets the upper und lower bounds of each dimension of the vector between the values of {0..1} except for the second and last whichi could be {-1..1}. The sum of all dimensions must not exceed 1. The function `distribute1 ()` generates the discrete action from the continuous one to pass it to the original environment. Theoretically infinite many.
 
-### **OekolopolySimple**
-*Klassenname: OekoEnvSimpleWrapper – `Action Wrapper`, `MultiDiscrete`*
+### **Simple Action Wrapper**
+*Klassenname: OekoSimpleActionWrapper – `Action Wrapper`, `MultiDiscrete`*
 
-Der Wrapper reduziert signifikant den Aktionsraum mit insgesamt 88 Aktionen verfügbar. Alle erlaubte Aktionen werden in einer Liste gespeichert. Der Agent wählt ein Element aus der Liste (bspw. entspricht das 75. dem String '210001') aus. In einer Schleife werden die zu vergebenden Punkte ausgerechnet. Dennoch wird geprüft, ob es noch Punkte zu verteilen sind, da es beim Runden der Zahlen floor () benutzt wird. Diese Funktion wandelt die gegebene Float-Zahl in die nächstliegende kleinere ganze Zahl um, was Punktverlust verursachen kann. Damit ist aber gesichert, dass es nie mehr Punkte verteilt werden, als es verfügbar gibt. Weiterhin sind die übrige Punkte unter diese Bereichen verteilt, die in der Zeichenkette mit keinem 0 gekennzeichnet sind. Das letzte Zeichen 1 vom String '210001'  weist darauf hin, dass Punkte von Produktion abgezogen werden müssen. Sind demnächst die zulässigen Grenzwerte eines Bereichs überschritten, werden sie korrigiert. Am Ende wird die Aktion an die originale Umgebung übergeben.
+Splits the available points in three groups which are to be distributed among all regions in the game. The wrapper uses a list of legal actions represented as strings and at each round chooses a random element (index). For example the string '210001' gives 2/3 of the points to the first region Sanierung whilst the rest belongs to the Produktion. The last character indicates that the points assigned to the second region must be subtracted (0 - add, 1 - subtract). 847 total actions
 
-### **OekolopolySimpleObsBox** 
+### **Simple Observation Wrapper** 
 *Klassenname: OekoSimpleObsWrapper – `Observation Wrapper`, `MultiDiscrete`*
 
-Dieser Wrapper übersetzt den Zustandsraum in niedrig-mittel-hoch und damit ergeben sich insgesamt 6561 Zustände. Um berechnet zu werden, welcher Wert der bestimmte Bereich annehmen soll, wird seiner aktuelle Wert durch den maximalen geteilt und mit 3 multipliziert. Zum Beispiel:
- ```python 
- obs[0] = floor ( 1 / 29 * 3)
- ```
- Sanierung ist der erste Bereich und wegen ihrem aktuellen Wert 1 ist der niegrigste Klasse gleich 0. Auf deise Weise werden die Werte aller Bereiche aktualisiert. 
- Zusätzlich kann die Anzahl der Observations und der Klassen, nach deren sich jede einzelne Observation teilt (hier niedrig-mittel-hoch), durch die Variablen `obs_count` und `obs_split` eingestellt werden. Anschließend verfügt der Agent über den umgewandelten Zustand.
+Splits the values of the regions into the three categories low-medium-high corresponding to the numbers 0, 1, 2. The newly generated observation is given at the end of each step. The variables `obs_count` and `obs_split` denote the number of regions and the number of categories to be split in. 6654 total observations
+
 
 ### **OekolopolyBoxReward** 
 *Klassenname: OekoRewardWrapper – `Reward Wrapper`*
