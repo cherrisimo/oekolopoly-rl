@@ -19,7 +19,7 @@ Number of actions: 847 total actions
 
 Splits the values of the regions into the three categories low-medium-high corresponding to the numbers 0, 1, 2. The newly generated observation is given at the end of each step. The variables `obs_count` and `obs_split` denote the number of regions and the number of categories to be split in. 
 
-Number of observations : 6654 total observations
+Number of observations : 6561 total observations
 
 
 ### **OekolopolyBoxReward** 
