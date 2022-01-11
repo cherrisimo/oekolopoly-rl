@@ -1,6 +1,6 @@
 # Overview
 
-Unarchive the .zip file to get hold of the best agents trained for this project.
+Unarchive the .zip files to get hold of the best agents trained for this project. 
 
 | Algorithm | Agent .zip File      | Played Rounds | Balance | Wrapper                                    |
 |-----------|----------------------|---------------|---------|--------------------------------------------|
