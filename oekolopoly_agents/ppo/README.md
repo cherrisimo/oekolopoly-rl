@@ -3,7 +3,7 @@
 Unarchive the .zip file to get hold of the best agents trained for this project.
 
 Algorithm    | Agent File           | Played Rounds | Balance | Wrapper
------------- | -------------        | -------------
+------------ | -------------        | ------------- | ------- | ------------- 
 PPO          | OekolopolyRew2-v0_4  | 21            |21.67    |Box Action Wrapper
              | OekolopolyRew3-v0_11 | 30            |15.76    |Simple Action Wrapper
              | OekolopolyRew2-v0_35 | 18            |24.76    |Box Action + Simple Observation Wrapper
