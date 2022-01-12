@@ -22,10 +22,10 @@ Splits the values of the regions into the three categories low-medium-high corre
 Number of observations : 6561 total observations
 
 
-### **OekolopolyBoxReward** 
+### **Hilfsreward Wrapper** 
 *Class Name: OekoRewardWrapper – `Reward Wrapper`*
 
-Adds a reward at each round. See table of rewards in main README.md file.
+Adds an auxiliary reward at each round. See [table of classes](https://github.com/cherrisimo/oekolopoly-rl#class-overview) in main README.md file where all kind of rewards are listed. For the implementation of rewards is however another means of end used.
 
 ## Usage
 Directly replace the original `wrappers.py` with the available file here.
