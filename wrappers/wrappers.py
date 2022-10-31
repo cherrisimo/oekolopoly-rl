@@ -137,7 +137,7 @@ class OekoSimpleActionWrapper(gym.ActionWrapper):
         remaining = 0
         for i in range (5):
             region_points_float = points / 3 * int (act_string[i])
-            region_points_int   = floor (region_points_float)
+            region_points_int   = np.floor (region_points_float)
             remaining          += region_points_float - region_points_int
             regions[i]          = region_points_int
         remaining = round (remaining)

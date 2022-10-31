@@ -1,7 +1,7 @@
 import gym
 import numpy as np
 
-env = gym.make('oekolopoly:Oekolopoly-v0')
+env = gym.make('oekolopoly:Oekolopoly-v0')   # problem in PyCharm, see test_WK.py
 env.reset ()
 
 print("Reset: ", env.reset())

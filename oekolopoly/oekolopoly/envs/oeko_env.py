@@ -253,29 +253,28 @@ class OekoEnv(gym.Env):
             self.V[self.UMWELTBELASTUNG] += box1
             if self.V[self.UMWELTBELASTUNG] not in range (1, 30):
                 done = True
-                done_info = "Umweltbelastung ist außerhalb des zulässigen Ranges"
+                done_info = "Umweltbelastung "+str(self.V[ self.UMWELTBELASTUNG])+" ist außerhalb des zulässigen Ranges"
         
         if not done:
             box2 = gb.get_box2   (self.V[self.SANIERUNG])
             self.V[self.SANIERUNG] += box2
             if self.V[self.SANIERUNG] not in range (1, 30):
                 done = True
-                done_info = "Sanierung ist außerhalb des zulässigen Ranges"
+                done_info = "Sanierung "+str(self.V[ self.SANIERUNG])+" ist außerhalb des zulässigen Ranges"
         
         if not done:
             box3 = gb.get_box3   (self.V[self.PRODUKTION])
             self.V[ self.PRODUKTION] += box3
             if self.V[ self.PRODUKTION] not in range (1, 30):
                 done = True
-                done_info = "Produktion ist außerhalb des zulässigen Ranges"
-            
-            
+                done_info = "Produktion "+str(self.V[ self.PRODUKTION])+" ist außerhalb des zulässigen Ranges"
+
         if not done:
             box4 = gb.get_box4   (self.V[self.PRODUKTION])
             self.V[self.UMWELTBELASTUNG] += box4
             if self.V[self.UMWELTBELASTUNG] not in range (1, 30):
                 done = True
-                done_info = "Umweltbelastung ist außerhalb des zulässigen Ranges"
+                done_info = "Umweltbelastung "+str(self.V[ self.UMWELTBELASTUNG])+" ist außerhalb des zulässigen Ranges"
         
 
         if not done:
@@ -283,21 +282,21 @@ class OekoEnv(gym.Env):
             self.V[self.UMWELTBELASTUNG] += box5
             if self.V[self.UMWELTBELASTUNG] not in range (1, 30):
                 done = True
-                done_info = "Umweltbelastung ist außerhalb des zulässigen Ranges"
+                done_info = "Umweltbelastung "+str(self.V[ self.UMWELTBELASTUNG])+" ist außerhalb des zulässigen Ranges"
 
         if not done:
             box6 = gb.get_box6   (self.V[self.UMWELTBELASTUNG])
             self.V[self.LEBENSQUALITAET]  += box6
             if self.V[self.LEBENSQUALITAET] not in range (1, 30):
                 done = True
-                done_info = "Lebensqualitaet ist außerhalb des zulässigen Ranges"
+                done_info = "Lebensqualitaet "+str(self.V[ self.LEBENSQUALITAET])+" ist außerhalb des zulässigen Ranges"
 
         if not done:
             box7 = gb.get_box7   (self.V[self.AUFKLAERUNG])
             self.V[self.AUFKLAERUNG] += box7
             if self.V[self.AUFKLAERUNG] not in range (1, 30):
                 done = True
-                done_info = "Aufklaerung ist außerhalb des zulässigen Ranges"
+                done_info = "Aufklaerung "+str(self.V[ self.AUFKLAERUNG])+" ist außerhalb des zulässigen Ranges"
             
             
         if not done:
@@ -305,7 +304,7 @@ class OekoEnv(gym.Env):
             self.V[self.LEBENSQUALITAET]  += box8
             if self.V[self.LEBENSQUALITAET] not in range (1, 30):
                 done = True
-                done_info = "Lebensqualitaet ist außerhalb des zulässigen Ranges"
+                done_info = "Lebensqualitaet "+str(self.V[ self.LEBENSQUALITAET])+" ist außerhalb des zulässigen Ranges"
         
 
         if not done:
@@ -317,7 +316,7 @@ class OekoEnv(gym.Env):
             self.V[self.VERMEHRUNGSRATE] += box9
             if self.V[self.VERMEHRUNGSRATE] not in range (1, 30):
                 done = True
-                done_info = "Vermehrungsrate ist außerhalb des zulässigen Ranges"
+                done_info = "Vermehrungsrate "+str(self.V[ self.VERMEHRUNGSRATE])+" ist außerhalb des zulässigen Ranges"
 
 
         if not done:
@@ -325,7 +324,7 @@ class OekoEnv(gym.Env):
             self.V[ self.LEBENSQUALITAET]  += box10
             if self.V[self.LEBENSQUALITAET] not in range (1, 30):
                 done = True
-                done_info = "Lebensqualitaet ist außerhalb des zulässigen Ranges"
+                done_info = "Lebensqualitaet "+str(self.V[ self.LEBENSQUALITAET])+" ist außerhalb des zulässigen Ranges"
             
 
         if not done:
@@ -333,7 +332,7 @@ class OekoEnv(gym.Env):
             self.V[ self.VERMEHRUNGSRATE] += box11
             if self.V[self.VERMEHRUNGSRATE] not in range (1, 30):
                 done = True
-                done_info = "Vermehrungsrate ist außerhalb des zulässigen Ranges"
+                done_info = "Vermehrungsrate "+str(self.V[ self.VERMEHRUNGSRATE])+" ist außerhalb des zulässigen Ranges"
         
 
         if not done:
@@ -341,7 +340,7 @@ class OekoEnv(gym.Env):
             self.V[self.POLITIK] += box12
             if self.V[self.POLITIK] not in range (-10, 38):
                 done = True
-                done_info = "Politik ist außerhalb des zulässigen Ranges"
+                done_info = "Politik "+str(self.V[ self.POLITIK])+" ist außerhalb des zulässigen Ranges"
 
         if not done:
             box13 = gb.get_box13 (self.V[self.VERMEHRUNGSRATE])
@@ -349,7 +348,7 @@ class OekoEnv(gym.Env):
             self.V[self.BEVOELKERUNG] += box13 * boxW
             if self.V[self.BEVOELKERUNG] not in range (1, 49):
                 done = True
-                done_info = "Bevoelkerung ist außerhalb des zulässigen Ranges"
+                done_info = "Bevoelkerung "+str(self.V[ self.BEVOELKERUNG])+" ist außerhalb des zulässigen Ranges"
         
 
         if not done:
@@ -357,7 +356,7 @@ class OekoEnv(gym.Env):
             self.V[ self.LEBENSQUALITAET] += box14
             if self.V[self.LEBENSQUALITAET] not in range (1, 30):
                 done = True
-                done_info = "Lebensqualitaet ist außerhalb des zulässigen Ranges"
+                done_info = "Lebensqualitaet "+str(self.V[ self.LEBENSQUALITAET])+" ist außerhalb des zulässigen Ranges"
 
         return  self.V, done, done_info
     
@@ -482,8 +481,11 @@ class OekoEnv(gym.Env):
         self.init_v = init_v
 
 
-    def reset (self):
-        self.V = self.get_initial_v ()
+    def reset(self,v=None):
+        if v is None:
+            self.V = self.get_initial_v()
+        else:
+            self.V = np.array(v)            # non-default initial values v
 
         self.curr_action = np.zeros (self.action_space.shape[0], 'int64')
         self.curr_result = self.V.copy ()

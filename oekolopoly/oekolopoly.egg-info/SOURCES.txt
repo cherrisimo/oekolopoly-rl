@@ -1,0 +1,6 @@
+setup.py
+oekolopoly.egg-info/PKG-INFO
+oekolopoly.egg-info/SOURCES.txt
+oekolopoly.egg-info/dependency_links.txt
+oekolopoly.egg-info/requires.txt
+oekolopoly.egg-info/top_level.txt

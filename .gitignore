@@ -1,0 +1,35 @@
+*.class
+bin/*
+doc/*
+.classpath
+.project
+*.lnk
+*.idea
+*.iml
+*.settings
+
+wrappers/__pycache__
+oekolopoly_agents/ppo/*
+oekolopoly/oekolopoly/__pycache__
+oekolopoly/oekolopoly/envs/__pycache__
+
+# Windows
+# =========================
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+/bin/
+/experiments/

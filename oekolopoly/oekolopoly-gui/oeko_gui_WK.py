@@ -1,10 +1,22 @@
+"""
+A slightly modified version of oeko_gui:
+    - replaced the line env = gym.make(...) with env = OekoEnv()
+      In order to import OekoEnv correctly, the three tricky lines below starting
+      with 'scriptpath = ...' are needed
+"""
+import os
 import sys
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QIcon, QFont, QColor
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QSlider, QLabel, QTableWidget, QTableWidgetItem, QHBoxLayout, QVBoxLayout, QGridLayout
 
-import gym
+#import gym
 
+scriptpath = "../"
+sys.path.append(os.path.abspath(scriptpath))
+scriptpath = "oekolopoly-gui"
+sys.path.append(os.path.abspath(scriptpath))
+from oekolopoly.envs.oeko_env import OekoEnv
 
 def get_avaiable_points (env, sliders):
     if hasattr (env, 'V'):
@@ -137,6 +149,9 @@ def step (step_button, env, action_sliders, obs_table, obs_status, points_label)
                             "Bilanz: {}\n"
                             "Reward: {}".format (info['invalid_move_info'], round(env.balance), round(env.reward)))
 
+        update_obs_table (obs_table, list(env.V) + [info['balance'], reward])
+        update_points_label (points_label, env, action_sliders)
+
 
 def reset (step_button, env, action_sliders, obs_table, obs_status, points_label):
     env.reset ()
@@ -153,8 +168,8 @@ def reset (step_button, env, action_sliders, obs_table, obs_status, points_label
 
 
 def main ():
-    # env = gym.make('oekolopoly:Oekolopoly-v0')     # will not run in PyCharm
-    env = gym.make('Oekolopoly-v0')
+    #env = gym.make('oekolopoly:Oekolopoly-v0')
+    env = OekoEnv()
 
     qapp = QApplication (sys.argv)
 
