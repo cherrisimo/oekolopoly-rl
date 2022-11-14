@@ -1,7 +1,18 @@
 import gym
+import copy
 import numpy as np
 
-env = gym.make('oekolopoly:Oekolopoly-v0')   # problem in PyCharm, see test_WK.py
+def delete_env_id(env_id: str) -> None:
+    env_dict = copy.deepcopy(gym.envs.registration.registry.env_specs)
+    for env in env_dict:
+        if env_id in env:
+            del gym.envs.registration.registry.env_specs[env]
+
+#env = gym.make('oekolopoly:Oekolopoly-v0')   # will not run, "No module Oekolopoly-v0 found"
+env_id = 'oekolopoly:Oekolopoly-v0'
+delete_env_id(env_id)
+gym.register(id=env_id)
+env = gym.make(env_id)
 env.reset ()
 
 print("Reset: ", env.reset())
