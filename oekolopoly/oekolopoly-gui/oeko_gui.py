@@ -158,7 +158,7 @@ def delete_env_id(env_id: str) -> None:
             del gym.envs.registration.registry.env_specs[env]
 
 def main ():
-    env_id = 'oekolopoly:Oekolopoly-v0'     # will not run in PyCharm
+    env_id = 'oekolopoly:Oekolopoly-v0'     
     delete_env_id(env_id)
     gym.register(id=env_id)
     env = gym.make(env_id)
