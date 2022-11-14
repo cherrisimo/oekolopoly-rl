@@ -1,8 +1,9 @@
 from gym.envs.registration import register
 import gym
+import copy
 
 #env_dict = gym.envs.registration.registry.env_specs.copy()     # does not work in new PyCharm Py3.8
-env_dict = gym.envs.registration.registry.env_specs
+env_dict = copy.deepcopy(gym.envs.registration.registry.env_specs)
 for env in env_dict:
     if 'Oekolopoly-v0' in env:
          del gym.envs.registration.registry.env_specs[env]

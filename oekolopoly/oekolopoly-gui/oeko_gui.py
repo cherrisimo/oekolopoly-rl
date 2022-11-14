@@ -151,10 +151,17 @@ def reset (step_button, env, action_sliders, obs_table, obs_status, points_label
 
     update_points_label (points_label, env, action_sliders)
 
+def delete_env_id(env_id: str) -> None:
+    env_dict = gym.envs.registration.registry.env_specs
+    for env in env_dict:
+        if env_id in env:
+            del gym.envs.registration.registry.env_specs[env]
 
 def main ():
-    # env = gym.make('oekolopoly:Oekolopoly-v0')     # will not run in PyCharm
-    env = gym.make('Oekolopoly-v0')
+    env_id = 'oekolopoly:Oekolopoly-v0'     # will not run in PyCharm
+    delete_env_id(env_id)
+    gym.register(id=env_id)
+    env = gym.make(env_id)
 
     qapp = QApplication (sys.argv)
 

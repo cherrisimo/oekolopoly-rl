@@ -45,6 +45,7 @@ if newer_python_version:
 model = PPO.load(MODEL, env=env,custom_objects=custom_objects)  
 
 tot_reward=0
+env.seed(42)
 obs = env.reset()
 print("obs = ",obs)
 
